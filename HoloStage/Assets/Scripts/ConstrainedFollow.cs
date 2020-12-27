@@ -61,7 +61,7 @@ public class ConstrainedFollow : MonoBehaviour
             }
             if( overlap == 0 )
             {
-                Debug.LogError("Not inside bounds");
+                // Debug.LogError("Not inside bounds");
                 m_target.position = m_cp;
             }
             else{
