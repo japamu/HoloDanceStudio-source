@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: a_eye_closed
   m_EditorClassIdentifier: 
   m_name: a_eye_closed
-  m_image: {fileID: 7892975639424919136, guid: aa8500cca8a79a149bd1a93856bfce79, type: 3}
+  m_image: {fileID: 21300000, guid: 1741011c580e616479f73b129bad831d, type: 3}

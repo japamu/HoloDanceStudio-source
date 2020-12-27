@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: a_mouth_o
   m_EditorClassIdentifier: 
   m_name: a_mouth_o
-  m_image: {fileID: 0}
+  m_image: {fileID: 21300000, guid: 90ed838e624ef724e9fdc24dbbabcb8b, type: 3}
