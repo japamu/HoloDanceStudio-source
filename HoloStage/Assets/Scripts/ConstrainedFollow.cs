@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointConstrains : MonoBehaviour
+
+public class ConstrainedFollow : MonoBehaviour
 {
     public Transform m_target;
     public Collider2D[] m_bounds;
@@ -12,7 +13,7 @@ public class PointConstrains : MonoBehaviour
     private Vector3 m_mousePosition;
     public float m_moveSpeed = 0.1f;
     private Vector2 m_position = Vector2.zero;
-    // private List<Vector2> m_closePoints = new List<Vector2>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +27,13 @@ public class PointConstrains : MonoBehaviour
         {
             return;
         }
+        if( !Utils.MouseScreenCheck() )
+        {
+            return;
+        }
         m_mousePosition = Input.mousePosition;
         m_mousePosition = Camera.main.ScreenToWorldPoint(m_mousePosition);
         m_position = Vector2.Lerp( m_target.position, m_mousePosition, m_moveSpeed);
-        // m_target.position = m_position;
 
         if( (Vector2)m_mousePosition == m_lastPos )
         {
@@ -38,8 +42,7 @@ public class PointConstrains : MonoBehaviour
         }
         else
         {
-            // m_closePoints.Clear();
-            m_lastPos = m_mousePosition;
+            
             m_cp = (Vector3)m_position + (Vector3.one * 100f);
             int overlap = 0;
 
@@ -53,6 +56,7 @@ public class PointConstrains : MonoBehaviour
                 {
                     Vector2 t = m_bounds[i].ClosestPoint(m_position);
                     m_cp =  Vector2.Distance( m_lastPos, t) < Vector2.Distance( m_lastPos, m_cp) ? t:m_cp;
+                    // m_cp = Vector2.Lerp( m_target.position, m_cp, m_moveSpeed);
                 }
             }
             if( overlap == 0 )
@@ -63,6 +67,9 @@ public class PointConstrains : MonoBehaviour
             else{
                 m_target.position = m_position;
             }
+            m_lastPos = m_target.position;
         }
     }
+
+    
 }
