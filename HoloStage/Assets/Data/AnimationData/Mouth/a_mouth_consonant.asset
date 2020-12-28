@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_name: a_mouth_consonant
   m_image: {fileID: 21300000, guid: 548bb23518b47894d99a1469e646aa45, type: 3}
+  m_animationLayer: 1

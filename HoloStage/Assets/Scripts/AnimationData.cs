@@ -7,5 +7,6 @@ public class AnimationData : ScriptableObject
 {
     public string m_name;
     public Sprite m_image;
+    public int m_animationLayer;
 
 }
