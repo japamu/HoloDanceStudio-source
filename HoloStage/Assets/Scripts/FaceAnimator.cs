@@ -5,6 +5,7 @@ using UnityEngine;
 public class FaceAnimator : MonoBehaviour
 {
     public Animator m_animator;
+    public HotkeySystem m_hotkeySystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,27 +15,17 @@ public class FaceAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( Input.GetKeyDown(KeyCode.Alpha1) )
+        if( !Input.anyKeyDown )
         {
-            Debug.Log("Pressed");
-            m_animator.Play("a_eye_normal", 0 );
+            return;
         }
-        else if( Input.GetKeyDown(KeyCode.Alpha2) )
+        foreach( KeyValuePair<KeyCode,HotkeyButton> item in m_hotkeySystem.HotkeyButtons )
         {
-            Debug.Log("Pressed");
-            m_animator.Play("a_eye_playful", 0 );
-        }
-        if( Input.GetKeyDown(KeyCode.Q) )
-        {
-            m_animator.Play("a_mouth_smile_large", 1 );
-        }
-        else if( Input.GetKeyDown(KeyCode.W) )
-        {
-            m_animator.Play("a_mouth_v", 1 );
-        }
-        else if( Input.GetKeyDown(KeyCode.E) )
-        {
-            m_animator.Play("a_mouth_a", 1 );
+            if( Input.GetKeyDown( item.Key ) && item.Value.GetAnimationData()!= null )
+            {
+                AnimationData current = item.Value.GetAnimationData();
+                m_animator.Play( current.m_name, current.m_animationLayer );
+            }
         }
 
     }

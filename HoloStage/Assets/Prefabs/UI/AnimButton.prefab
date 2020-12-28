@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 937522649061783107}
   - component: {fileID: 3336187076465410710}
   - component: {fileID: 4944111675590013537}
+  - component: {fileID: 4842829258416882953}
   m_Layer: 5
   m_Name: AnimButton
   m_TagString: Untagged
@@ -120,7 +121,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8144098262462937017}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4842829258416882953}
+        m_TargetAssemblyTypeName: AnimationButton, Assembly-CSharp
+        m_MethodName: ButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4842829258416882953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423045775094554674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466ae77d7623201468886e5902c72a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animImage: {fileID: 6154601666661332448}
 --- !u!1 &4009625540767553893
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +159,7 @@ GameObject:
   - component: {fileID: 797893115802422329}
   - component: {fileID: 8144098262462937017}
   m_Layer: 5
-  m_Name: Button_Image
+  m_Name: Button_Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -30,7 +30,7 @@ MonoBehaviour:
   - KeyName: 8
     KeyCode: 56
   - KeyName: 9
-    KeyCode: 56
+    KeyCode: 57
   Alpha:
   - KeyName: Q
     KeyCode: 113
