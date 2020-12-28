@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd434d0a8d995c84e92584a77d40ddc6, type: 3}
+  m_Name: HotkeyLibrary
+  m_EditorClassIdentifier: 
+  Numbers:
+  - KeyName: 1
+    KeyCode: 49
+  - KeyName: 2
+    KeyCode: 50
+  - KeyName: 3
+    KeyCode: 51
+  - KeyName: 4
+    KeyCode: 52
+  - KeyName: 5
+    KeyCode: 53
+  - KeyName: 6
+    KeyCode: 54
+  - KeyName: 7
+    KeyCode: 55
+  - KeyName: 8
+    KeyCode: 56
+  - KeyName: 9
+    KeyCode: 56
+  Alpha:
+  - KeyName: Q
+    KeyCode: 113
+  - KeyName: W
+    KeyCode: 119
+  - KeyName: E
+    KeyCode: 101
+  - KeyName: R
+    KeyCode: 114
+  - KeyName: T
+    KeyCode: 116
+  - KeyName: Y
+    KeyCode: 121
+  - KeyName: U
+    KeyCode: 117
+  - KeyName: I
+    KeyCode: 105
+  - KeyName: O
+    KeyCode: 111
