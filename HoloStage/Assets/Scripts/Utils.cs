@@ -22,4 +22,13 @@ public class Utils
             return true;
         }
     }
+
+    public static bool IsMobile()
+    {
+        #if UNITY_ANDROID
+            return true;
+        #else
+            return false;
+        #endif
+    }
 }
