@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 4922160697054639203}
   - component: {fileID: 6785675902714396835}
   - component: {fileID: 4922160697054639205}
+  - component: {fileID: 4026615447109009355}
   m_Layer: 5
   m_Name: BG_Canvas
   m_TagString: Untagged
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bgLibrary: {fileID: 11400000, guid: 35fd73c1a6c0b744490afa1783b92be0, type: 2}
   m_backgroundRenderer: {fileID: 0}
+--- !u!114 &4026615447109009355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922160697054639204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139c4dd241eb8fd4488749f10f4a880d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4922160697090774916
 GameObject:
   m_ObjectHideFlags: 0

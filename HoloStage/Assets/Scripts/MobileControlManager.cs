@@ -10,9 +10,17 @@ public class MobileControlManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if( m_spineIK_controller != null && m_joystick != null )
+        if ( Utils.IsMobile() )
         {
-            m_spineIK_controller.SetJoystick( m_joystick );
+            m_joystick.gameObject.SetActive( true );
+            if( m_spineIK_controller != null && m_joystick != null )
+            {
+                m_spineIK_controller.SetJoystick( m_joystick );
+            }
+        }
+        else
+        {
+            m_joystick.gameObject.SetActive( false );
         }
     }
 

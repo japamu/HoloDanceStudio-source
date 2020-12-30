@@ -203,6 +203,9 @@ MonoBehaviour:
   m_hideCanvasGroup:
   - {fileID: 1317424544944456119}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &589120528016270632
 GameObject:
   m_ObjectHideFlags: 0

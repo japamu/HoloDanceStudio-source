@@ -10,6 +10,7 @@ public class HotkeyButton : MonoBehaviour
     private AnimationData m_animData;
     private HotkeyData m_hotkeyData;
     private Action<HotkeyButton> m_callback;
+    private ControlButton m_controlButton;
 
     // Start is called before the first frame update
     public HotkeyData GetHotkeyData()
@@ -29,9 +30,18 @@ public class HotkeyButton : MonoBehaviour
 
     }
 
-    public void SetAnimData( AnimationData p_animData )
+    public void SetControlButton( ControlButton p_controlButton )
+    {
+        m_controlButton = p_controlButton;
+    }
+
+    public void SetAnimationData( AnimationData p_animData )
     {
         m_animData = p_animData;
+        if( m_controlButton != null )
+        {
+            m_controlButton.SetAnimationData(m_animData);
+        }
         if( m_animData != null )
         {
             m_animImage.sprite = m_animData.m_image;

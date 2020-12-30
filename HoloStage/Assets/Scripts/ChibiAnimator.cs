@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceAnimator : MonoBehaviour
+public class ChibiAnimator : MonoBehaviour
 {
     public Animator m_animator;
-    public HotkeySystem m_hotkeySystem;
-    // Start is called before the first frame update
-    void Start()
+    private HotkeySystem m_hotkeySystem;
+    public void SetHotkeySystem( HotkeySystem p_hotkeySystem )
     {
-        
+        m_hotkeySystem = p_hotkeySystem;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if( m_hotkeySystem == null )
+        {
+            return;
+        }
         if( !Input.anyKeyDown )
         {
             return;
@@ -23,10 +26,14 @@ public class FaceAnimator : MonoBehaviour
         {
             if( Input.GetKeyDown( item.Key ) && item.Value.GetAnimationData()!= null )
             {
-                AnimationData current = item.Value.GetAnimationData();
-                m_animator.Play( current.m_name, current.m_animationLayer );
+                AnimateCharacter( item.Value.GetAnimationData() );
             }
         }
 
+    }
+
+    public void AnimateCharacter( AnimationData p_animData )
+    {
+        m_animator.Play( p_animData.m_name, p_animData.m_animationLayer );
     }
 }

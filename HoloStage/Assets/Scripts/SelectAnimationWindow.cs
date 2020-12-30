@@ -76,7 +76,7 @@ public class SelectAnimationWindow : MonoBehaviour
 
     public void SelectAnimation( AnimationData p_anim )
     {
-        m_selectedHotkey.SetAnimData( p_anim );
+        m_selectedHotkey.SetAnimationData( p_anim );
         if( p_anim != null )
         {
             m_selectedKey_icon.enabled = true;
