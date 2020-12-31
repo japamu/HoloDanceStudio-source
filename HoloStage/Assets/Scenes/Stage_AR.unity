@@ -326,8 +326,8 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: Pekomera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 744291254}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
-  m_LightEstimation: 0
+  m_LightEstimation: -1
   m_FacingDirection: 1
 --- !u!114 &744291256
 MonoBehaviour:
@@ -581,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &842232663
 Transform:
   m_ObjectHideFlags: 0
@@ -855,6 +855,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 842232663}
     m_Modifications:
+    - target: {fileID: 867350064921769008, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 867350064921769008, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
+      propertyPath: m_ScaleFactor
+      value: 0.856
+      objectReference: {fileID: 0}
     - target: {fileID: 867350064921769010, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -943,13 +951,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mobile_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3137174137786265031, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
+      propertyPath: Radio
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3137174137796465545, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5644939798291692179, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
       propertyPath: m_spineIK_controller
       value: 
       objectReference: {fileID: 996142731}
     - target: {fileID: 8636058719682854259, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1096
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
@@ -1348,17 +1364,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+      propertyPath: m_hideCanvasGroup.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[1]
       value: 
       objectReference: {fileID: 1692636805}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1119121178}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[3]
       value: 
-      objectReference: {fileID: 1119121178}
+      objectReference: {fileID: 1586646483649788470}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[4]
       value: 
