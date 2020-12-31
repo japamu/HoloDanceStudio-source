@@ -15,7 +15,7 @@ public class ConstrainedFollow : MonoBehaviour
     private Vector2 m_position = Vector2.zero;
 
     private bool m_bIsMobile;
-    private bl_Joystick m_joystick;
+    private Joystick m_joystick;
     public bool m_debugMobile;
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class ConstrainedFollow : MonoBehaviour
         #endif
     }
 
-    public void SetJoystick( bl_Joystick p_joystick )
+    public void SetJoystick( Joystick p_joystick )
     {
         m_joystick = p_joystick;
     }
@@ -50,7 +50,7 @@ public class ConstrainedFollow : MonoBehaviour
             //Control Scheme for Mobile
             if( m_joystick != null )
             {
-                // Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
+                Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
                 Vector2 joystickPos = new Vector2( m_joystick.Horizontal, m_joystick.Vertical );
                 m_target.position = GetPositionInBounds(joystickPos);
             }
@@ -101,8 +101,8 @@ public class ConstrainedFollow : MonoBehaviour
 
     Vector2 GetPositionInBounds( Vector2 p_position )
     {
-        float maxVector = 5.0f;
-        p_position /= maxVector;
+        // float maxVector = 5.0f;
+        // p_position /= maxVector;
         // float boundsMultiplier = Vector2.Distance( m_bounds[0].bounds.center, m_bounds[0].bounds.max );
         float boundsX_mult = Mathf.Abs(m_bounds[0].bounds.center.x - m_bounds[0].bounds.max.x);
         float boundsY_mult = Mathf.Abs(m_bounds[0].bounds.center.y - m_bounds[0].bounds.max.y);

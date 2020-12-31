@@ -5,7 +5,7 @@ using UnityEngine;
 public class MobileControlManager : MonoBehaviour
 {
     [Header("Movement")]
-    public bl_Joystick m_joystick;
+    public Joystick m_joystick;
     public ConstrainedFollow m_spineIK_controller;
     // Start is called before the first frame update
     void Start()
