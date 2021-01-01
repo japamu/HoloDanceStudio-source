@@ -1191,7 +1191,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3568240249993604007
 MonoBehaviour:
@@ -3287,22 +3287,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3568240249993604005}
     m_Modifications:
-    - target: {fileID: 1580762099, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580762099, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_IsOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580762099, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: HotkeySystem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1580762099, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleHotkeyWindow
-      objectReference: {fileID: 0}
     - target: {fileID: 5596279411868480473, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
       propertyPath: m_Name
       value: SettingsButton
@@ -3391,86 +3375,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5596279411868480476, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8f263031b188e894d8efe5bd47f0a127, type: 3}
-    - target: {fileID: 5596279411868480476, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411939, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279412011411941, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8f263031b188e894d8efe5bd47f0a127, type: 3}
-    - target: {fileID: 5596279412011411941, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914540, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914541, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5596279413776914541, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1af2de6f00c147d4299f8d9d5348be08, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc341135ed83c674a8c54b19840ad7d9, type: 3}
 --- !u!224 &3568240251274503152 stripped
