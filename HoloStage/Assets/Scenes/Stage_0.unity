@@ -651,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 867350064921769010, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 867350064921769010, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -739,6 +739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hotkey_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3568240249993604001, guid: afaf71f1ef1e4e54c915da30b2c12d84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3568240249993604005, guid: afaf71f1ef1e4e54c915da30b2c12d84, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -769,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3568240249993604005, guid: afaf71f1ef1e4e54c915da30b2c12d84, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3568240249993604005, guid: afaf71f1ef1e4e54c915da30b2c12d84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
