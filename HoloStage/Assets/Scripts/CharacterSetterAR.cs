@@ -16,6 +16,7 @@ public class CharacterSetterAR : MonoBehaviour
     public ARRaycastManager m_raycastManager;
     public GameObject m_ARObjects;
     public GameObject m_character;
+    public CharacterARManipulator m_charARManipulator;
     [Header("Initialize Detecting")]
     public GameObject m_revealUI;
     public GameObject RaycastPointer;
@@ -76,6 +77,7 @@ public class CharacterSetterAR : MonoBehaviour
                     bHasInitiatedInvasion = true;
                     m_ARObjects.SetActive(true);
                     m_character.transform.position = AR_hitResults[0].pose.position ;
+                    m_charARManipulator.InitializeValues();
                     m_revealUI.SetActive(false);
                     RaycastPointer.SetActive(false);
 
@@ -107,23 +109,23 @@ public class CharacterSetterAR : MonoBehaviour
                 m_revealUI.SetActive(true);
                 bIsReadyForInvasion = true;
                 RaycastPointer.SetActive(true);
-                plane.GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+                // plane.GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
                 //Instantiate a fader plane here and start game instance
             }
         }
-        else
-        {
-            for(int i = 0; i < obj.added.Count; i++ )
-            {
-                obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-                // obj.added[i].gameObject.SetActive(false);
-            }
-            for(int i = 0; i < obj.updated.Count; i++ )
-            {
-                obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-                // obj.updated[i].gameObject.SetActive(false);
-            }
-        }
+        // else
+        // {
+        //     for(int i = 0; i < obj.added.Count; i++ )
+        //     {
+        //         obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+        //         // obj.added[i].gameObject.SetActive(false);
+        //     }
+        //     for(int i = 0; i < obj.updated.Count; i++ )
+        //     {
+        //         obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+        //         // obj.updated[i].gameObject.SetActive(false);
+        //     }
+        // }
     }
 
     private float CalculatePlaneArea(ARPlane p_plane) {
