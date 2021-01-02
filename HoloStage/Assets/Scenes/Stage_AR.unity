@@ -439,6 +439,7 @@ MonoBehaviour:
   - 1
   - 1.1
   - 1.5
+  initialScaleIndex: 2
   deltaMinimum: 0.025
   debugDeltaMinLabel: {fileID: 833287970}
 --- !u!1 &446076677
@@ -2257,6 +2258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reveal_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3261808626536857380, guid: ba0998d3865b8ea43937b0e7d6332334, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba0998d3865b8ea43937b0e7d6332334, type: 3}
 --- !u!1 &6786245058932340163
@@ -2456,17 +2461,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+      propertyPath: m_hideCanvasGroup.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[1]
       value: 
-      objectReference: {fileID: 1692636805}
+      objectReference: {fileID: 1119121178}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1586646483649788470}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[3]
       value: 
-      objectReference: {fileID: 1119121178}
+      objectReference: {fileID: 1692636805}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[4]
       value: 

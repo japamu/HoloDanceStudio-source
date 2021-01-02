@@ -10,6 +10,7 @@ public class CharacterARManipulator : MonoBehaviour
     [Header("Character")]
     public Transform m_character;
     public float[] m_presetScale;
+    public int initialScaleIndex = 2;
     [Range(0,1)]
     public float deltaMinimum = 0.1f;
 
@@ -30,11 +31,12 @@ public class CharacterARManipulator : MonoBehaviour
 
     public void InitializeValues()
     {
-        scaleIndex = 0;
+        scaleIndex = initialScaleIndex;
         pinchIndex = 0;
         m_originalRot = Quaternion.identity;
         m_originalRot.eulerAngles = m_character.localRotation.eulerAngles ;
         m_screenSize = new Vector2( Screen.width, Screen.height );
+        m_character.localScale = Vector3.one * m_presetScale[scaleIndex];
     }
 
     // Start is called before the first frame update

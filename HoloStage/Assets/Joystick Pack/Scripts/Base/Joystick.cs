@@ -22,7 +22,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         set { deadZone = Mathf.Abs(value); }
     }
 
-    [SerializeField, Range(0.01f, 1)]private float SmoothTime = 0.5f;//return to default position speed
+    [SerializeField, Range(0.01f, 1)]private float SmoothTime = 0.1f;//return to default position speed
 
     public AxisOptions AxisOptions { get { return AxisOptions; } set { axisOptions = value; } }
     public bool SnapX { get { return snapX; } set { snapX = value; } }
@@ -190,7 +190,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             StopAllCoroutines();
             StartCoroutine(ScaleJoysctick(false));
             input = Vector2.zero;
-            // handle.anchoredPosition = Vector2.zero;
+            handle.anchoredPosition = Vector2.zero;
         }
     }
 
