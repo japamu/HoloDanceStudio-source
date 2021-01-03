@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MusicPlayer : MonoBehaviour
 {
     public AudioSource m_audioSource;
     public Text m_label_filename;
     public PlayButton m_playButton;
+    // public Button m_handleButton;
     public Slider m_musicScrubber;
     public Text m_label_timeCurrent;
     public Text m_label_timeTotal;
@@ -15,6 +17,7 @@ public class MusicPlayer : MonoBehaviour
     private TimeSpan m_timespan_total;
     private string m_fileName;
     private float m_musicSpeed;
+    private bool m_bIsBeingDragged;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class MusicPlayer : MonoBehaviour
         m_musicScrubber.interactable = false;
         m_playButton.SetIcon(false);
         m_musicSpeed = 1;
+        m_bIsBeingDragged = false;
     }
 
     // Update is called once per frame
@@ -54,9 +58,21 @@ public class MusicPlayer : MonoBehaviour
 
     public void UpdateMusicUI()
     {
-        m_timespan_current = TimeSpan.FromSeconds( m_audioSource.time );
-        m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
-        m_musicScrubber.value = m_audioSource.time / m_audioSource.clip.length;
+        if( m_bIsBeingDragged )
+        {
+            float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
+            m_timespan_current = TimeSpan.FromSeconds( sliderToTime );
+            m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
+        }
+        else
+        {
+            m_timespan_current = TimeSpan.FromSeconds( m_audioSource.time );
+            m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
+            m_musicScrubber.value = m_audioSource.time / m_audioSource.clip.length;
+        }
+        // m_timespan_current = TimeSpan.FromSeconds( m_audioSource.time );
+        // m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
+        // m_musicScrubber.value = m_audioSource.time / m_audioSource.clip.length;
     }
 
     public void OnPressPlayButton()
@@ -86,5 +102,18 @@ public class MusicPlayer : MonoBehaviour
     {
         float sliderToTime = p_slider.value * m_audioSource.clip.length;
         m_audioSource.time = sliderToTime;
+    }
+
+    public void OnHandlePressed()
+    {
+        m_bIsBeingDragged = true;
+    }
+
+    public void OnHandleReleased()
+    {
+        m_bIsBeingDragged = false;
+        float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
+        m_audioSource.time = sliderToTime;
+        
     }
 }
