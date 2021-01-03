@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -30,5 +30,10 @@ public class Utils
         #else
             return false;
         #endif
+    }
+
+    public static string TimeSpanToFormattedString( TimeSpan p_timespan )
+    {
+        return p_timespan.ToString(@"mm\:ss");
     }
 }

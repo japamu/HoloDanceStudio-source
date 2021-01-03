@@ -50,7 +50,7 @@ public class ConstrainedFollow : MonoBehaviour
             //Control Scheme for Mobile
             if( m_joystick != null )
             {
-                Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
+                // Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
                 Vector2 joystickPos = new Vector2( m_joystick.Horizontal, m_joystick.Vertical );
                 m_target.position = GetPositionInBounds(joystickPos);
             }
