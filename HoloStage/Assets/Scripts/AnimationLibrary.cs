@@ -8,3 +8,11 @@ public class AnimationLibrary : ScriptableObject
     public AnimationData[] eyeAnimation;
     public AnimationData[] mouthAnimation;
 }
+
+
+public enum AnimationType{
+    Eye = 0,
+    Mouth,
+    Pose,
+    Count
+}

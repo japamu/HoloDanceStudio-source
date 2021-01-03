@@ -16,10 +16,11 @@ public class MusicLoader : MonoBehaviour
 		// It is sufficient to set the filters just once (instead of each time before showing the file browser dialog), 
 		// if all the dialogs will be using the same filters
         #if UNITY_ANDROID
-		    FileBrowser.SetFilters( true, new FileBrowser.Filter( "Audio", ".mp3", ".ogg") );
+		    FileBrowser.SetFilters( false, new FileBrowser.Filter( "Audio", ".mp3", ".ogg") );
 		    FileBrowser.SetDefaultFilter( ".mp3" );
+			FileBrowser.SingleClickMode = true;
         #else
-		    FileBrowser.SetFilters( true, new FileBrowser.Filter( "Audio", ".wav", ".ogg" ) );
+		    FileBrowser.SetFilters( false, new FileBrowser.Filter( "Audio", ".wav", ".ogg" ) );
 		    FileBrowser.SetDefaultFilter( ".wav" );
         #endif
 
