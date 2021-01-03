@@ -6,18 +6,22 @@ using UnityEngine.UI;
 public class MusicPlayer : MonoBehaviour
 {
     public AudioSource m_audioSource;
+    public Text m_label_filename;
     public PlayButton m_playButton;
     public Slider m_musicScrubber;
     public Text m_label_timeCurrent;
     public Text m_label_timeTotal;
     private TimeSpan m_timespan_current;
     private TimeSpan m_timespan_total;
+    private string m_fileName;
+    private float m_musicSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         m_musicScrubber.interactable = false;
         m_playButton.SetIcon(false);
+        m_musicSpeed = 1;
     }
 
     // Update is called once per frame
@@ -29,9 +33,11 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
-    public void SetAudioFile( AudioClip p_clip )
+    public void SetAudioFile( AudioClip p_clip, string p_filename = "" )
     {
         m_audioSource.clip = p_clip;
+        m_fileName = p_filename;
+        m_label_filename.text = m_fileName;
     }
 
     public void CompletedLoading()

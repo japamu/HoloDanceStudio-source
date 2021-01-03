@@ -98,7 +98,7 @@ public class MusicLoader : MonoBehaviour
 				// using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(p_path , AudioType.MPEG))
 				AudioClip myClip = DownloadHandlerAudioClip.GetContent(www);
                 
-				m_musicPlayer.SetAudioFile( myClip );
+				m_musicPlayer.SetAudioFile( myClip, FileBrowserHelpers.GetFilename( p_path ) );
 				m_musicPlayer.CompletedLoading();
                 Debug.Log("Music Load Successful");
             }
