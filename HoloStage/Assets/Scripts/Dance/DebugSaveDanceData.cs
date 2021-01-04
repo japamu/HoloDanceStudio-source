@@ -15,7 +15,7 @@ public class DebugSaveDanceData : MonoBehaviour
         {
             SavedFollowData temp1 = new SavedFollowData();
             temp1.timestamp = i;
-            temp1.pointerPosition = new Vector2( i , -i );
+            temp1.pointerPositions.Add ( new Vector2( i , -i ) );
 
             SavedAnimationData temp2 = new SavedAnimationData();
             temp2.timestamp = i;

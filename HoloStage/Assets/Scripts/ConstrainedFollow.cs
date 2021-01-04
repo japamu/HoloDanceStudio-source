@@ -57,6 +57,10 @@ public class ConstrainedFollow : MonoBehaviour
         }
         else
         {
+            if( !Input.GetMouseButton(0) )
+            {
+                return;
+            }
             //Control Scheme for Desktop Exe
             m_mousePosition = Input.mousePosition;
             m_mousePosition = Camera.main.ScreenToWorldPoint(m_mousePosition);

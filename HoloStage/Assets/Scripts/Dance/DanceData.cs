@@ -21,10 +21,11 @@ public class SavedTimeStamp
 [Serializable]
 public class SavedFollowData: SavedTimeStamp
 {
-    public Vector2 pointerPosition;
+    public List<Vector2> pointerPositions;
     public SavedFollowData()
     {
-        pointerPosition = Vector2.zero;
+
+        pointerPositions = new List<Vector2>();
     }
 }
 [Serializable]
