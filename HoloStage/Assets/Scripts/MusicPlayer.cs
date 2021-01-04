@@ -8,9 +8,10 @@ public class MusicPlayer : MonoBehaviour
 {
     public AudioSource m_audioSource;
     public Text m_label_filename;
-    public PlayButton m_playButton;
+    public ToggleIconButton m_playButton;
     // public Button m_handleButton;
     public Slider m_musicScrubber;
+    public ToggleIconButton m_muteButton;
     public Text m_label_timeCurrent;
     public Text m_label_timeTotal;
     private TimeSpan m_timespan_current;
@@ -115,5 +116,17 @@ public class MusicPlayer : MonoBehaviour
         float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
         m_audioSource.time = sliderToTime;
         
+    }
+
+    public void OnVolumeSliderChanged(Slider p_slider)
+    {
+        // float sliderToTime = p_slider.value * m_audioSource.clip.length;
+        m_audioSource.volume = p_slider.value;
+    }
+
+    public void OnPressMuteButton()
+    {
+        m_audioSource.mute = !m_audioSource.mute;
+        m_muteButton.SetIcon( m_audioSource.mute );
     }
 }

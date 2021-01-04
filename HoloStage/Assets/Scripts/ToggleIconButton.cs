@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayButton : MonoBehaviour
+public class ToggleIconButton : MonoBehaviour
 {
     public Image m_buttonIcon;
     public Sprite[] m_iconSet;
 
-    public void SetIcon ( bool p_isPlaying )
+    public void SetIcon ( bool p_value )
     {
-        int iconIndex = p_isPlaying? 1 : 0;
+        int iconIndex = p_value? 1 : 0;
         m_buttonIcon.sprite = m_iconSet[iconIndex];
     }
 }
