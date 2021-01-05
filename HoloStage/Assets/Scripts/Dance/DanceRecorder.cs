@@ -36,3 +36,5 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         
     }
 }
+
+//50 Width for 0.1 second
