@@ -94,9 +94,15 @@ public class MusicPlayer : MonoBehaviour
     }
     public void OnPressStopButton()
     {
-        m_audioSource.Stop();
-        m_playButton.SetIcon( m_audioSource.isPlaying );
-        UpdateMusicUI();
+        if( m_audioSource.clip != null )
+        {
+            m_audioSource.Stop();
+            m_playButton.SetIcon( m_audioSource.isPlaying );
+            UpdateMusicUI();
+        }
+        else{
+            m_playButton.SetIcon( false );
+        }
     }
 
     public void OnSliderChanged(Slider p_slider)

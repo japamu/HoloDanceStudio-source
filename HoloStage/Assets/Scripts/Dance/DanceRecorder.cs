@@ -8,6 +8,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     private bool b_isRecording;
     private DanceData m_danceData;
 
+    public bool IsRecording{ get{ return b_isRecording; } }
+
     void Start()
     {
         b_isRecording = false;
