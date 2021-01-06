@@ -35,7 +35,10 @@ public class TimeIndicator : MonoBehaviour
 
     public void UpdateTimelineDisplay()
     {
-        m_timelineScrollBar.value = m_indicator.value;
+        float seconds = m_indicator.value * m_totalTime;
+        m_timelineScrollBar.value = (m_currentTime+1)/m_totalTime;
+
+
     }
 
     public void StartTimeFlow()
@@ -77,8 +80,10 @@ public class TimeIndicator : MonoBehaviour
     {
         if(  DanceRecorder.Instance.IsRecording && m_totalTime - m_currentTime < TIME_MARGIN_FOR_EXTEND )
         {
-            m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
-            m_totalTime += TIME_TO_EXTEND;
+            m_timelineRect.sizeDelta += Time.deltaTime * VECTOR_DISTANCE_PER_SECOND;
+            m_totalTime += Time.deltaTime;
+            // m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
+            // m_totalTime += TIME_TO_EXTEND;
         }
     }
 }
