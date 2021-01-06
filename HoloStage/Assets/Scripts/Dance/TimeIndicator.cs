@@ -11,6 +11,7 @@ public class TimeIndicator : MonoBehaviour
     private static float DISTANCE_PER_SECOND = 500f;
     private readonly Vector2 VECTOR_DISTANCE_PER_SECOND = new Vector2(500f, 0f);
 
+    public ToggleIconButton m_playButton;
     public Slider m_indicator;
     public RectTransform m_timelineRect;
     public Scrollbar m_timelineScrollBar;
@@ -35,16 +36,32 @@ public class TimeIndicator : MonoBehaviour
 
     public void UpdateTimelineDisplay()
     {
-        float seconds = m_indicator.value * m_totalTime;
-        m_timelineScrollBar.value = (m_currentTime+1)/m_totalTime;
+        m_timelineRect.anchoredPosition = (m_currentTime-2)* -VECTOR_DISTANCE_PER_SECOND;
+    }
 
-
+    public void OnPressPlayButton()
+    {
+        if( !m_bIsTimeFlowing )
+        {
+            StartTimeFlow();
+        }
+        else
+        {
+            PauseTimeFlow();
+        }
+        m_playButton.SetIcon( m_bIsTimeFlowing );
     }
 
     public void StartTimeFlow()
     {
         Debug.LogError("Start Time Flow");
         m_bIsTimeFlowing = true;
+    }
+    public void PauseTimeFlow()
+    {
+        Debug.LogError("Pause Time Flow");
+        m_bIsTimeFlowing = false;
+        m_playButton.SetIcon( m_bIsTimeFlowing );
     }
 
     public void StopTimeFlow()
@@ -73,6 +90,7 @@ public class TimeIndicator : MonoBehaviour
             ExtendTimeline();
             UpdateIndicatorPosition();
             UpdateTimelineDisplay();
+            FinishTimeline();
         }
     }
 
@@ -80,10 +98,18 @@ public class TimeIndicator : MonoBehaviour
     {
         if(  DanceRecorder.Instance.IsRecording && m_totalTime - m_currentTime < TIME_MARGIN_FOR_EXTEND )
         {
-            m_timelineRect.sizeDelta += Time.deltaTime * VECTOR_DISTANCE_PER_SECOND;
-            m_totalTime += Time.deltaTime;
-            // m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
-            // m_totalTime += TIME_TO_EXTEND;
+            // m_timelineRect.sizeDelta += Time.deltaTime * VECTOR_DISTANCE_PER_SECOND;
+            // m_totalTime += Time.deltaTime;
+            m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
+            m_totalTime += TIME_TO_EXTEND;
+        }
+    }
+
+    private void FinishTimeline()
+    {
+        if( !DanceRecorder.Instance.IsRecording && m_currentTime >= m_totalTime )
+        {
+            PauseTimeFlow();
         }
     }
 }

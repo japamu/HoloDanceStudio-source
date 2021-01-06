@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c78c099ec0d0b4892daf681b256c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playButton: {fileID: 8147260679723393127}
   m_indicator: {fileID: 6067085026148375844}
   m_timelineRect: {fileID: 2300232019918986755}
   m_timelineScrollBar: {fileID: 2926524884931683746}
@@ -1279,7 +1280,7 @@ PrefabInstance:
       objectReference: {fileID: 6291345584607000134}
     - target: {fileID: 1075495630554400248, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartTimeFlow
+      value: OnPressPlayButton
       objectReference: {fileID: 0}
     - target: {fileID: 1075495630554400248, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
