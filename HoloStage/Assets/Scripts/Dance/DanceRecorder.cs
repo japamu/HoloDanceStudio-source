@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DanceRecorder : MonoInstance<DanceRecorder>
 {
+    [Header("References")]
+    public GameObject m_timelineClipPrefab;
+    public TimeIndicator m_timeIndicator;
+    public Transform[] m_track;
+
+    [Header("UI")]
     public RecorderButton[] m_recordButton;
     private bool b_isRecording;
     private DanceData m_danceData;
@@ -19,6 +25,15 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         base.Awake();
     }
 
+    private void Update()
+    {
+        if( IsRecording && Input.GetKeyDown(KeyCode.Space) )
+        {
+            RecordAnimation( new AnimationData() );
+        }
+        
+    }
+
     public void OnRecordButtonPressed()
     {
         b_isRecording = !b_isRecording;
@@ -30,7 +45,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void RecordAnimation( AnimationData p_data )
     {
-        
+        GameObject temp = Instantiate( m_timelineClipPrefab, m_track[ Random.Range( 0, 2) ] );
+        temp.GetComponent<RectTransform>().anchoredPosition = m_timeIndicator.GetCurrentSetPosition();
     }
 
     public void RecordAnimation( SavedFollowData p_data )

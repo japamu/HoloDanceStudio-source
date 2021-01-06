@@ -24,6 +24,11 @@ public class TimeIndicator : MonoBehaviour
         return m_currentTime;
     }
 
+    public Vector2 GetCurrentSetPosition()
+    {
+        return m_currentTime*VECTOR_DISTANCE_PER_SECOND;
+    }
+
     public void SetCurrentTime( Slider p_slider )
     {
         m_currentTime = p_slider.value * m_totalTime;
