@@ -805,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296ff30fc13442e4186142b7458d72c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timelineClipPrefab: {fileID: 2031240196671086021, guid: a20b30280089d4f4aafedd8721a0566e, type: 3}
+  m_timelineClipPrefab: {fileID: 1499559578366236582, guid: a20b30280089d4f4aafedd8721a0566e, type: 3}
   m_timeIndicator: {fileID: 6291345584607000134}
   m_track:
   - {fileID: 4140399963676342049}

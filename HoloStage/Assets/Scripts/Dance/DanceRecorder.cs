@@ -5,7 +5,7 @@ using UnityEngine;
 public class DanceRecorder : MonoInstance<DanceRecorder>
 {
     [Header("References")]
-    public GameObject m_timelineClipPrefab;
+    public TimelineClip m_timelineClipPrefab;
     public TimeIndicator m_timeIndicator;
     public Transform[] m_track;
 
@@ -13,6 +13,13 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public RecorderButton[] m_recordButton;
     private bool b_isRecording;
     private DanceData m_danceData;
+
+    //System
+    private List<TimelineClip> m_pointerTrackClips;
+    private List<TimelineClip> m_animationTrackClips;
+
+    private TimelineClip m_latestPointerClip;
+    private float m_pointerDuration;
 
     public bool IsRecording{ get{ return b_isRecording; } }
 
@@ -27,10 +34,26 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private void Update()
     {
-        if( IsRecording && Input.GetKeyDown(KeyCode.Space) )
+        if( !IsRecording )
         {
-            RecordAnimation( new AnimationData() );
+            return;
         }
+        if( Input.GetKeyDown(KeyCode.Space) )
+        {
+            RecordAnimation( new SavedPointerData() );
+            m_pointerDuration = 0;
+        }
+        else if ( Input.GetKey(KeyCode.Space) )
+        {
+            m_latestPointerClip.SetWidth( m_timeIndicator.ConvertDurationToWidth( m_pointerDuration ) );
+        }
+        else if ( Input.GetKeyUp(KeyCode.Space) )
+        {
+            m_latestPointerClip.SetWidth( m_timeIndicator.ConvertDurationToWidth( m_pointerDuration ) );
+            m_pointerDuration = 0;
+        }
+        m_pointerDuration += Time.deltaTime;
+
         
     }
 
@@ -45,13 +68,17 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void RecordAnimation( AnimationData p_data )
     {
-        GameObject temp = Instantiate( m_timelineClipPrefab, m_track[ Random.Range( 0, 2) ] );
-        temp.GetComponent<RectTransform>().anchoredPosition = m_timeIndicator.GetCurrentSetPosition();
+        TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ Random.Range( 0, 2) ] ).GetComponent<TimelineClip>();
+        temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
+        // temp.GetComponent<RectTransform>().anchoredPosition = m_timeIndicator.GetCurrentSetPosition();
+
     }
 
-    public void RecordAnimation( SavedFollowData p_data )
+    public void RecordAnimation( SavedPointerData p_data )
     {
-        
+        TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
+        temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
+        m_latestPointerClip = temp;
     }
 }
 

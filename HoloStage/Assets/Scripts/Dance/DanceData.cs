@@ -5,11 +5,11 @@ using UnityEngine;
 [Serializable]
 public class DanceData
 {
-    public List<SavedFollowData> FollowDatas;
+    public List<SavedPointerData> PointerDatas;
     public List<SavedAnimationData> AnimationDatas;
     public DanceData()
     {
-        FollowDatas = new List<SavedFollowData>();
+        PointerDatas = new List<SavedPointerData>();
         AnimationDatas = new List<SavedAnimationData>();
     }
 }
@@ -19,10 +19,10 @@ public class SavedTimeStamp
        public float timestamp;
 }
 [Serializable]
-public class SavedFollowData: SavedTimeStamp
+public class SavedPointerData: SavedTimeStamp
 {
     public List<Vector2> pointerPositions;
-    public SavedFollowData()
+    public SavedPointerData()
     {
 
         pointerPositions = new List<Vector2>();

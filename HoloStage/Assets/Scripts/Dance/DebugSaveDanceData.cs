@@ -13,7 +13,7 @@ public class DebugSaveDanceData : MonoBehaviour
         m_danceData = new DanceData();
         for( int i = 0 ; i < 5 ; i++ )
         {
-            SavedFollowData temp1 = new SavedFollowData();
+            SavedPointerData temp1 = new SavedPointerData();
             temp1.timestamp = i;
             temp1.pointerPositions.Add ( new Vector2( i , -i ) );
 
@@ -21,7 +21,7 @@ public class DebugSaveDanceData : MonoBehaviour
             temp2.timestamp = i;
             temp2.animType = i%2;
             temp2.animIndex = i;
-            m_danceData.FollowDatas.Add( temp1 );
+            m_danceData.PointerDatas.Add( temp1 );
             m_danceData.AnimationDatas.Add( temp2 );
         }
 
