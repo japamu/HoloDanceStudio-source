@@ -10,6 +10,12 @@ public class TimelineClip : MonoBehaviour
 
     private SavedPointerData m_savedPointerData;
     private SavedAnimationData m_savedAnimationData;
+    private bool m_pointerIsOver; 
+
+    public void PointerOver( bool p_pointerIsOver )
+    {
+        m_pointerIsOver = p_pointerIsOver;
+    }
     
 
     private void Start() 
@@ -36,6 +42,20 @@ public class TimelineClip : MonoBehaviour
             size.x = p_width;
             m_rectTransform.sizeDelta = size;
         }
+    }
+
+    private void Update()
+    {
+        if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
+        {
+            RemoveFromTrack();
+        }
+    }
+
+    public void RemoveFromTrack()
+    {
+        //Remove this from list
+        Destroy( this.gameObject );
     }
 
 
