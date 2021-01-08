@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MusicPlayer : MonoBehaviour
 {
+    public TimeIndicator m_timeIndicator;
     public AudioSource m_audioSource;
     public Text m_label_filename;
     public ToggleIconButton m_playButton;
@@ -121,7 +122,12 @@ public class MusicPlayer : MonoBehaviour
         m_bIsBeingDragged = false;
         float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
         m_audioSource.time = sliderToTime;
-        
+        m_timeIndicator.OverrideIndicatorValue( sliderToTime );
+    }
+
+    public void OverrideSliderValue( float p_seconds )
+    {
+        m_musicScrubber.value = p_seconds/m_audioSource.clip.length;
     }
 
     public void OnVolumeSliderChanged(Slider p_slider)
@@ -134,5 +140,17 @@ public class MusicPlayer : MonoBehaviour
     {
         m_audioSource.mute = !m_audioSource.mute;
         m_muteButton.SetIcon( m_audioSource.mute );
+    }
+
+    public void ForcePause()
+    {
+        //Toggle Between pause and play
+        if( m_audioSource.clip != null )
+        {
+            if( m_audioSource.isPlaying )
+            {
+                m_audioSource.Pause();
+            }
+        }
     }
 }

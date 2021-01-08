@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c78c099ec0d0b4892daf681b256c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_musicPlayer: {fileID: 8486140655913893464}
   m_playButton: {fileID: 8147260679723393127}
   m_indicator: {fileID: 6067085026148375844}
   m_timelineRect: {fileID: 2300232019918986755}
@@ -864,6 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6e3337653f8934aa02af409a4dd6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_timeIndicator: {fileID: 6291345584607000134}
   m_audioSource: {fileID: 3017157778827881640}
   m_label_filename: {fileID: 9026260870451119923}
   m_playButton: {fileID: 8147260679723393127}
@@ -1652,6 +1654,30 @@ PrefabInstance:
     - target: {fileID: 8229698164868569011, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6291345584607000134}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnIndicatorPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6291345584607000134}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnIndicatorReleased
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeIndicator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476503591456004236, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeIndicator, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8495335881560099487, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_SizeDelta.x

@@ -11,6 +11,7 @@ public class TimeIndicator : MonoBehaviour
     private static float DISTANCE_PER_SECOND = 500f;
     private readonly Vector2 VECTOR_DISTANCE_PER_SECOND = new Vector2(500f, 0f);
 
+    public MusicPlayer m_musicPlayer;
     public ToggleIconButton m_playButton;
     public Slider m_indicator;
     public RectTransform m_timelineRect;
@@ -20,6 +21,8 @@ public class TimeIndicator : MonoBehaviour
     private bool m_bIsTimeFlowing = false;
     private float m_currentTime;
     private float m_totalTime;
+
+    private bool m_bIsBeingDragged;
 
     public float GetCurrentTime()
     {
@@ -39,6 +42,29 @@ public class TimeIndicator : MonoBehaviour
     public void SetCurrentTime( Slider p_slider )
     {
         m_currentTime = p_slider.value * m_totalTime;
+    }
+
+    public void OnIndicatorPressed()
+    {
+        m_bIsBeingDragged = true;
+        if( m_bIsTimeFlowing )
+        {
+            PauseTimeFlow();
+        }
+    }
+    public void OnIndicatorReleased()
+    {
+        m_bIsBeingDragged = false;
+        float sliderToTime = m_indicator.value * m_totalTime;
+        m_currentTime = sliderToTime;
+        m_musicPlayer.OverrideSliderValue( sliderToTime );
+
+    }
+
+    public void OverrideIndicatorValue( float p_time )
+    {
+        m_currentTime = p_time;
+        m_indicator.value = p_time/m_totalTime;
     }
 
     public void OnIndicatorValueChanged()
@@ -84,6 +110,7 @@ public class TimeIndicator : MonoBehaviour
         Debug.LogError("Pause Time Flow");
         m_bIsTimeFlowing = false;
         m_playButton.SetIcon( m_bIsTimeFlowing );
+        m_musicPlayer.ForcePause();
     }
 
     public void StopTimeFlow()
@@ -99,6 +126,7 @@ public class TimeIndicator : MonoBehaviour
     void Start()
     {
         m_bIsTimeFlowing = false;
+        m_bIsBeingDragged = false;
         m_currentTime = 0;
         m_totalTime = m_timelineRect.sizeDelta.x/DISTANCE_PER_SECOND;
         OnTotalTimeValueChanged();
