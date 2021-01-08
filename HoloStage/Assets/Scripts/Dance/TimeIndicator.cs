@@ -15,6 +15,8 @@ public class TimeIndicator : MonoBehaviour
     public Slider m_indicator;
     public RectTransform m_timelineRect;
     public Scrollbar m_timelineScrollBar;
+    public Text m_label_currentTime;
+    public Text m_label_totalTime;
     private bool m_bIsTimeFlowing = false;
     private float m_currentTime;
     private float m_totalTime;
@@ -37,6 +39,16 @@ public class TimeIndicator : MonoBehaviour
     public void SetCurrentTime( Slider p_slider )
     {
         m_currentTime = p_slider.value * m_totalTime;
+    }
+
+    public void OnIndicatorValueChanged()
+    {
+        m_label_currentTime.text = Utils.FloatTimeToFormattedString( m_indicator.value * m_totalTime, true );
+    }
+
+    public void OnTotalTimeValueChanged()
+    {
+        m_label_totalTime.text = Utils.FloatTimeToFormattedString( m_totalTime, true );
     }
 
     public void UpdateIndicatorPosition()
@@ -89,6 +101,7 @@ public class TimeIndicator : MonoBehaviour
         m_bIsTimeFlowing = false;
         m_currentTime = 0;
         m_totalTime = m_timelineRect.sizeDelta.x/DISTANCE_PER_SECOND;
+        OnTotalTimeValueChanged();
     }
 
     // Update is called once per frame
@@ -112,6 +125,7 @@ public class TimeIndicator : MonoBehaviour
             // m_totalTime += Time.deltaTime;
             m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
             m_totalTime += TIME_TO_EXTEND;
+            OnTotalTimeValueChanged();
         }
     }
 

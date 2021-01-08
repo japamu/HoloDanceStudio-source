@@ -32,8 +32,22 @@ public class Utils
         #endif
     }
 
-    public static string TimeSpanToFormattedString( TimeSpan p_timespan )
+    public static string FloatTimeToFormattedString( float p_seconds, bool p_includeDecimal = false )
     {
-        return p_timespan.ToString(@"mm\:ss");
+        TimeSpan ts = TimeSpan.FromSeconds( p_seconds );
+        return TimeSpanToFormattedString( ts, p_includeDecimal);
+    }
+
+    public static string TimeSpanToFormattedString( TimeSpan p_timespan, bool p_includeDecimal = false )
+    {
+        if( p_includeDecimal )
+        {
+            return p_timespan.ToString(@"mm\:ss\.f");
+
+        }
+        else
+        {
+            return p_timespan.ToString(@"mm\:ss");
+        }
     }
 }
