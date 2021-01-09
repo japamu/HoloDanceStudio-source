@@ -6,7 +6,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 {
     [Header("References")]
     public TimelineClip m_timelineClipPrefab;
-    public TimeIndicator m_timeIndicator;
+    public TimelineController m_timeIndicator;
     public Transform[] m_track;
 
     [Header("UI")]

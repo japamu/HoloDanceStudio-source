@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeIndicator : MonoBehaviour
+public class TimelineController : MonoBehaviour
 {
     //Settings
     private static float TIME_MARGIN_FOR_EXTEND = 2f;
@@ -18,6 +18,8 @@ public class TimeIndicator : MonoBehaviour
     public Scrollbar m_timelineScrollBar;
     public Text m_label_currentTime;
     public Text m_label_totalTime;
+    public Text m_label_zoomLevel;
+    
     private bool m_bIsTimeFlowing = false;
     private float m_currentTime;
     private float m_totalTime;
@@ -179,4 +181,23 @@ public class TimeIndicator : MonoBehaviour
             PauseTimeFlow();
         }
     }
+
+    public void OnZoomPress(int p_value)
+    {
+        if( p_value == 0 )
+        {
+
+        }
+        //Zoom in
+        else if( p_value > 0 )
+        {
+
+        }
+        //Zoom out
+        else if( p_value < 0 )
+        {
+
+        }
+    }
+
 }

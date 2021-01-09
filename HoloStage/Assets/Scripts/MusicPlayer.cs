@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MusicPlayer : MonoBehaviour
 {
-    public TimeIndicator m_timeIndicator;
+    public TimelineController m_timeIndicator;
     public AudioSource m_audioSource;
     public Text m_label_filename;
     public ToggleIconButton m_playButton;

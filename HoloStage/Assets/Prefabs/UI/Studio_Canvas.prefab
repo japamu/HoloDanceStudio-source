@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1213197291393130751}
   - component: {fileID: 6291345584607000134}
   m_Layer: 0
-  m_Name: TimeIndicator
+  m_Name: TimelineController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_timelineScrollBar: {fileID: 2926524884931683746}
   m_label_currentTime: {fileID: 4551462285622084716}
   m_label_totalTime: {fileID: 1993950192664714875}
+  m_label_zoomLevel: {fileID: 2553147479441033476}
 --- !u!1 &1766106238489883757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1500,26 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8486140655913893464}
+    - target: {fileID: 4137274253707990169, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6291345584607000134}
+    - target: {fileID: 4137274253707990169, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnZoomPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137274253707990169, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeIndicator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137274253707990169, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137274253707990169, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4370970406960109958, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1585,7 +1606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5006722353725623595, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1493
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5006722353725623595, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1699,6 +1720,26 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7766725304817184191, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6291345584607000134}
+    - target: {fileID: 7766725304817184191, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnZoomPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766725304817184191, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeIndicator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766725304817184191, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766725304817184191, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8042720597507986863, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1803,6 +1844,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8912882320818232214, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6291345584607000134}
+    - target: {fileID: 8912882320818232214, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnZoomPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912882320818232214, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeIndicator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912882320818232214, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8984548555570467960, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_Size
       value: 0.8249999
@@ -1810,6 +1867,10 @@ PrefabInstance:
     - target: {fileID: 8984548555570467960, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_Value
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115041088626739821, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+      propertyPath: m_Name
+      value: ZoomLevel_Text
       objectReference: {fileID: 0}
     - target: {fileID: 9118296623742847426, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1821,20 +1882,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
---- !u!114 &2926524884931683746 stripped
+--- !u!114 &4551462285622084716 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8984548555570467960, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7717084511835583926, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
   m_PrefabInstance: {fileID: 6067085025159377370}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4551462285622084716 stripped
+--- !u!114 &1993950192664714875 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7717084511835583926, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5735741551543152545, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
   m_PrefabInstance: {fileID: 6067085025159377370}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1956,9 +2017,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1993950192664714875 stripped
+--- !u!114 &2926524884931683746 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5735741551543152545, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8984548555570467960, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
+  m_PrefabInstance: {fileID: 6067085025159377370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2553147479441033476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8600757864387262686, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
   m_PrefabInstance: {fileID: 6067085025159377370}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
