@@ -106,6 +106,20 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         }
     }
 
+    public void ClearTrack()
+    {
+        for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+        {
+            Destroy( m_pointerTrackClips[i].gameObject );
+        }
+        for( int i = 0 ; i < m_animationTrackClips.Count ; i++ )
+        {
+            Destroy( m_animationTrackClips[i].gameObject );
+        }
+        m_pointerTrackClips.Clear();
+        m_animationTrackClips.Clear();
+    }
+
     public void RefreshTrack( float p_zoomLevel)
     {
         for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
