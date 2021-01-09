@@ -22,7 +22,7 @@ public class TimeIndicator : MonoBehaviour
     private float m_currentTime;
     private float m_totalTime;
 
-    private bool m_bIsBeingDragged;
+    // private bool DanceRecorder.Instance.IsBeingDragged;
 
     public float GetCurrentTime()
     {
@@ -46,7 +46,7 @@ public class TimeIndicator : MonoBehaviour
 
     public void OnIndicatorPressed()
     {
-        m_bIsBeingDragged = true;
+        DanceRecorder.Instance.IsBeingDragged = true;
         if( m_bIsTimeFlowing )
         {
             PauseTimeFlow();
@@ -54,11 +54,10 @@ public class TimeIndicator : MonoBehaviour
     }
     public void OnIndicatorReleased()
     {
-        m_bIsBeingDragged = false;
+        DanceRecorder.Instance.IsBeingDragged = false;
         float sliderToTime = m_indicator.value * m_totalTime;
         m_currentTime = sliderToTime;
-        m_musicPlayer.OverrideSliderValue( sliderToTime );
-
+        m_musicPlayer.OverrideSliderValue( sliderToTime, true );
     }
 
     public void OverrideIndicatorValue( float p_time )
@@ -70,6 +69,12 @@ public class TimeIndicator : MonoBehaviour
     public void OnIndicatorValueChanged()
     {
         m_label_currentTime.text = Utils.FloatTimeToFormattedString( m_indicator.value * m_totalTime, true );
+        if( DanceRecorder.Instance.IsBeingDragged )
+        {
+            float sliderToTime = m_indicator.value * m_totalTime;
+            // m_currentTime = sliderToTime;
+            m_musicPlayer.OverrideSliderValue( sliderToTime );
+        }
     }
 
     public void OnTotalTimeValueChanged()
@@ -126,7 +131,7 @@ public class TimeIndicator : MonoBehaviour
     void Start()
     {
         m_bIsTimeFlowing = false;
-        m_bIsBeingDragged = false;
+        // DanceRecorder.Instance.IsBeingDragged = false;
         m_currentTime = 0;
         m_totalTime = m_timelineRect.sizeDelta.x/DISTANCE_PER_SECOND;
         OnTotalTimeValueChanged();
@@ -144,6 +149,16 @@ public class TimeIndicator : MonoBehaviour
             FinishTimeline();
         }
     }
+
+    // private void FixedUpdate() 
+    // {
+    //     if( DanceRecorder.Instance.IsBeingDragged )
+    //     {
+    //         float sliderToTime = m_indicator.value * m_totalTime;
+    //         m_currentTime = sliderToTime;
+    //         m_musicPlayer.OverrideSliderValue( sliderToTime );
+    //     }
+    // }
 
     private void ExtendTimeline()
     {

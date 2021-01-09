@@ -12,6 +12,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     [Header("UI")]
     public RecorderButton[] m_recordButton;
     private bool b_isRecording;
+    private bool b_isBeingDragged;
     private DanceData m_danceData;
 
     //System
@@ -22,10 +23,13 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     private float m_pointerDuration;
 
     public bool IsRecording{ get{ return b_isRecording; } }
+    public bool IsBeingDragged{ get{ return b_isBeingDragged; } set {b_isBeingDragged = value;}  }
+
 
     void Start()
     {
         b_isRecording = false;
+        b_isBeingDragged = false;
     }
     protected override void Awake()
     {

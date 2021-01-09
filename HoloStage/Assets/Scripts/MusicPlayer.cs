@@ -19,7 +19,7 @@ public class MusicPlayer : MonoBehaviour
     private TimeSpan m_timespan_total;
     private string m_fileName;
     private float m_musicSpeed;
-    private bool m_bIsBeingDragged;
+    // private bool DanceRecorder.Instance.IsBeingDragged;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,13 @@ public class MusicPlayer : MonoBehaviour
         m_musicScrubber.interactable = false;
         m_playButton.SetIcon(false);
         m_musicSpeed = 1;
-        m_bIsBeingDragged = false;
+        // DanceRecorder.Instance.IsBeingDragged = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if( m_audioSource.isPlaying )
+        if( m_audioSource.isPlaying || DanceRecorder.Instance.IsBeingDragged )
         {
             UpdateMusicUI();
         }
@@ -60,7 +60,7 @@ public class MusicPlayer : MonoBehaviour
 
     public void UpdateMusicUI()
     {
-        if( m_bIsBeingDragged )
+        if( DanceRecorder.Instance.IsBeingDragged )
         {
             float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
             m_timespan_current = TimeSpan.FromSeconds( sliderToTime );
@@ -106,28 +106,38 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
-    public void OnSliderChanged(Slider p_slider)
+    public void OnSliderChanged()
     {
-        float sliderToTime = p_slider.value * m_audioSource.clip.length;
-        m_audioSource.time = sliderToTime;
+        UpdateMusicUI();
+        if( DanceRecorder.Instance.IsBeingDragged )
+        {
+            float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
+            // m_currentTime = sliderToTime;
+            m_timeIndicator.OverrideIndicatorValue( sliderToTime );
+        }
     }
 
     public void OnHandlePressed()
     {
-        m_bIsBeingDragged = true;
+        DanceRecorder.Instance.IsBeingDragged = true;
     }
 
     public void OnHandleReleased()
     {
-        m_bIsBeingDragged = false;
+        DanceRecorder.Instance.IsBeingDragged = false;
         float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
         m_audioSource.time = sliderToTime;
         m_timeIndicator.OverrideIndicatorValue( sliderToTime );
     }
 
-    public void OverrideSliderValue( float p_seconds )
+    public void OverrideSliderValue( float p_seconds, bool p_bApplyTotime = false )
     {
+        if( p_bApplyTotime )
+        {
+            m_audioSource.time = p_seconds;
+        }
         m_musicScrubber.value = p_seconds/m_audioSource.clip.length;
+        UpdateMusicUI();
     }
 
     public void OnVolumeSliderChanged(Slider p_slider)
