@@ -30,6 +30,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     {
         b_isRecording = false;
         b_isBeingDragged = false;
+        m_pointerTrackClips = new List<TimelineClip>();
+        m_animationTrackClips = new List<TimelineClip>();
     }
     protected override void Awake()
     {
@@ -49,11 +51,13 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         }
         else if ( Input.GetKey(KeyCode.Space) )
         {
-            m_latestPointerClip.SetWidth( m_timeIndicator.ConvertDurationToWidth( m_pointerDuration ) );
+            // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
+            m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
         }
         else if ( Input.GetKeyUp(KeyCode.Space) )
         {
-            m_latestPointerClip.SetWidth( m_timeIndicator.ConvertDurationToWidth( m_pointerDuration ) );
+            // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
+            m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_pointerDuration = 0;
         }
         m_pointerDuration += Time.deltaTime;
@@ -74,7 +78,9 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     {
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ Random.Range( 0, 2) ] ).GetComponent<TimelineClip>();
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
+        temp.ClipType = TimelineClipType.Animation;
         // temp.GetComponent<RectTransform>().anchoredPosition = m_timeIndicator.GetCurrentSetPosition();
+        m_animationTrackClips.Add(temp);
 
     }
 
@@ -82,7 +88,36 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     {
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
+        temp.ClipType = TimelineClipType.Pointer;
         m_latestPointerClip = temp;
+        m_pointerTrackClips.Add(temp);
+    }
+
+    public void RemoveClip ( TimelineClip p_timelineClip )
+    {
+        if( p_timelineClip.ClipType == TimelineClipType.Animation )
+        {
+            m_animationTrackClips.Remove( p_timelineClip );
+        }
+        // else if( p_timelineClip.ClipType == TimelineClipType.Pointer )
+        else
+        {
+            m_pointerTrackClips.Remove( p_timelineClip );
+        }
+    }
+
+    public void RefreshTrack( float p_zoomLevel)
+    {
+        for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+        {
+            m_pointerTrackClips[i].RefreshPosition(p_zoomLevel);
+            m_pointerTrackClips[i].RefreshWidth(p_zoomLevel);
+        }
+        for( int i = 0 ; i < m_animationTrackClips.Count ; i++ )
+        {
+            m_animationTrackClips[i].RefreshPosition(p_zoomLevel);
+            m_animationTrackClips[i].RefreshWidth(p_zoomLevel);
+        }
     }
 }
 

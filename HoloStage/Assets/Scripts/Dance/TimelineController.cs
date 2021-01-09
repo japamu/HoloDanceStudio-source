@@ -23,6 +23,10 @@ public class TimelineController : MonoBehaviour
     private bool m_bIsTimeFlowing = false;
     private float m_currentTime;
     private float m_totalTime;
+    private int m_zoomLevelIndex;
+    private readonly float[] m_zoomLevelArray = {1f,2f,4f};
+    public float ZoomLevel {get{ return m_zoomLevelArray[m_zoomLevelIndex]; }}
+
 
     // private bool DanceRecorder.Instance.IsBeingDragged;
 
@@ -33,12 +37,17 @@ public class TimelineController : MonoBehaviour
 
     public Vector2 GetCurrentSetPosition()
     {
-        return m_currentTime*VECTOR_DISTANCE_PER_SECOND;
+        return m_currentTime*VECTOR_DISTANCE_PER_SECOND*ZoomLevel;
     }
 
-    public float ConvertDurationToWidth( float p_duration )
+    public static float ConvertTimeToPosition( float p_duration, float p_zoomLevel = 1f )
     {
-        return p_duration * DISTANCE_PER_SECOND;
+        return p_duration * DISTANCE_PER_SECOND * p_zoomLevel ;
+    }
+
+    public static float ConvertDurationToWidth( float p_duration, float p_zoomLevel = 1f )
+    {
+        return p_duration * DISTANCE_PER_SECOND * p_zoomLevel ;
     }
 
     public void SetCurrentTime( Slider p_slider )
@@ -91,7 +100,7 @@ public class TimelineController : MonoBehaviour
 
     public void UpdateTimelineDisplay()
     {
-        m_timelineRect.anchoredPosition = (m_currentTime-2)* -VECTOR_DISTANCE_PER_SECOND;
+        m_timelineRect.anchoredPosition = ( (m_currentTime-(2/ZoomLevel )  )* -VECTOR_DISTANCE_PER_SECOND ) * ZoomLevel;
     }
 
     public void OnPressPlayButton()
@@ -135,7 +144,8 @@ public class TimelineController : MonoBehaviour
         m_bIsTimeFlowing = false;
         // DanceRecorder.Instance.IsBeingDragged = false;
         m_currentTime = 0;
-        m_totalTime = m_timelineRect.sizeDelta.x/DISTANCE_PER_SECOND;
+        m_zoomLevelIndex = 0;
+        m_totalTime = m_timelineRect.sizeDelta.x/(DISTANCE_PER_SECOND*ZoomLevel);
         OnTotalTimeValueChanged();
     }
 
@@ -168,7 +178,7 @@ public class TimelineController : MonoBehaviour
         {
             // m_timelineRect.sizeDelta += Time.deltaTime * VECTOR_DISTANCE_PER_SECOND;
             // m_totalTime += Time.deltaTime;
-            m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND;
+            m_timelineRect.sizeDelta += TIME_TO_EXTEND * VECTOR_DISTANCE_PER_SECOND * ZoomLevel;
             m_totalTime += TIME_TO_EXTEND;
             OnTotalTimeValueChanged();
         }
@@ -186,18 +196,27 @@ public class TimelineController : MonoBehaviour
     {
         if( p_value == 0 )
         {
-
+            m_zoomLevelIndex = 0;
         }
         //Zoom in
         else if( p_value > 0 )
         {
-
+            if( m_zoomLevelIndex < m_zoomLevelArray.Length-1 )
+            {
+                m_zoomLevelIndex++;
+            }
         }
         //Zoom out
         else if( p_value < 0 )
         {
-
+            if( m_zoomLevelIndex > 0 )
+            {
+                m_zoomLevelIndex--;
+            }
         }
+        m_label_zoomLevel.text = $"x{ZoomLevel}.00";
+        m_timelineRect.sizeDelta = m_totalTime * VECTOR_DISTANCE_PER_SECOND * ZoomLevel;
+        DanceRecorder.Instance?.RefreshTrack(ZoomLevel );
     }
 
 }

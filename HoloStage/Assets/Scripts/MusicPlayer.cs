@@ -62,8 +62,11 @@ public class MusicPlayer : MonoBehaviour
     {
         if( DanceRecorder.Instance.IsBeingDragged )
         {
-            float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
-            m_timespan_current = TimeSpan.FromSeconds( sliderToTime );
+            if( m_audioSource.clip != null )
+            {
+                float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
+                m_timespan_current = TimeSpan.FromSeconds( sliderToTime );
+            }
             m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
         }
         else
@@ -136,8 +139,11 @@ public class MusicPlayer : MonoBehaviour
         {
             m_audioSource.time = p_seconds;
         }
-        m_musicScrubber.value = p_seconds/m_audioSource.clip.length;
-        UpdateMusicUI();
+        if( m_audioSource.clip != null )
+        {
+            m_musicScrubber.value = p_seconds/m_audioSource.clip.length;
+            UpdateMusicUI();
+        }
     }
 
     public void OnVolumeSliderChanged(Slider p_slider)
