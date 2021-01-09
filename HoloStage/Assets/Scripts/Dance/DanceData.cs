@@ -5,10 +5,12 @@ using UnityEngine;
 [Serializable]
 public class DanceData
 {
+    public float TotalDuration;
     public List<SavedPointerData> PointerDatas;
     public List<SavedAnimationData> AnimationDatas;
     public DanceData()
     {
+        TotalDuration = 0;
         PointerDatas = new List<SavedPointerData>();
         AnimationDatas = new List<SavedAnimationData>();
     }

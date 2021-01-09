@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,10 +14,13 @@ public class TimelineClip : MonoBehaviour
     [SerializeField] private RectTransform m_rectTransform;
     private float m_timestamp;
     private float m_duration;
-
+    private AnimationData m_animData;
     private SavedPointerData m_savedPointerData;
     private SavedAnimationData m_savedAnimationData;
+    public SavedPointerData SavedPointerData{ get{return m_savedPointerData;} }
+    public SavedAnimationData SavedAnimationData{ get{return m_savedAnimationData;} }
     private bool m_pointerIsOver; 
+    private Action<AnimationData> m_callback;
 
     private TimelineClipType m_timelineClip;
     public TimelineClipType ClipType{ get{return m_timelineClip;} set{m_timelineClip=value;} }
@@ -31,6 +34,19 @@ public class TimelineClip : MonoBehaviour
     private void Start() 
     {
         m_rectTransform = GetComponent<RectTransform>();
+    }
+
+    public void SetCallback( Action<AnimationData> p_callback )
+    {
+        m_callback = p_callback;
+    }
+    public void SetAnimationData( AnimationData p_animData, int p_animIndex )
+    {
+        m_animData = p_animData;
+        m_savedAnimationData = new SavedAnimationData();
+        m_savedAnimationData.animType = p_animData.m_animationLayer;
+        m_savedAnimationData.animIndex = p_animIndex;
+        m_savedAnimationData.timestamp = m_timestamp;
     }
 
     public void SetTimestamp( float p_timestamp, Vector2 p_position )
@@ -88,6 +104,17 @@ public class TimelineClip : MonoBehaviour
         //Remove this from list
         DanceRecorder.Instance.RemoveClip(this);
         Destroy( this.gameObject );
+    }
+
+    public void onPress()
+    {
+        if( m_callback!= null )
+        {
+            m_callback.Invoke( m_animData );
+            Debug.Log( $"Animation Layer:{m_savedAnimationData.animType} | Animation Index:{m_savedAnimationData.animIndex} " );
+            //m_savedAnimationData.animType = p_animData.m_animationLayer;
+            //m_savedAnimationData.animIndex = p_animIndex;
+        }
     }
 
 

@@ -872,6 +872,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 156654500817899068, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_chibiAnimator
+      value: 
+      objectReference: {fileID: 646129962}
+    - target: {fileID: 156654500817899068, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_animationLibrary
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d52bad2bc47b9f4abc063185e96a762, type: 2}
     - target: {fileID: 214684414049937825, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0

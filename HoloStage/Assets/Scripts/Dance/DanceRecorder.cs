@@ -8,6 +8,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public TimelineClip m_timelineClipPrefab;
     public TimelineController m_timeIndicator;
     public Transform[] m_track;
+    public ChibiAnimator m_chibiAnimator;
+    public AnimationLibrary m_animationLibrary;
 
     [Header("UI")]
     public RecorderButton[] m_recordButton;
@@ -21,7 +23,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private TimelineClip m_latestPointerClip;
     private float m_pointerDuration;
-
+    
     public bool IsRecording{ get{ return b_isRecording; } }
     public bool IsBeingDragged{ get{ return b_isBeingDragged; } set {b_isBeingDragged = value;}  }
 
@@ -76,9 +78,15 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void RecordAnimation( AnimationData p_data )
     {
-        TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ Random.Range( 0, 2) ] ).GetComponent<TimelineClip>();
+        if( !b_isRecording )
+        {
+            return;
+        }
+        TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 1 ] ).GetComponent<TimelineClip>();
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
         temp.ClipType = TimelineClipType.Animation;
+        temp.SetAnimationData( p_data, m_animationLibrary.GetAnimationIndex(p_data) );
+        temp.SetCallback( m_chibiAnimator.AnimateCharacter );
         // temp.GetComponent<RectTransform>().anchoredPosition = m_timeIndicator.GetCurrentSetPosition();
         m_animationTrackClips.Add(temp);
 
@@ -86,6 +94,10 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void RecordAnimation( SavedPointerData p_data )
     {
+        if( !b_isRecording )
+        {
+            return;
+        }
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
         temp.ClipType = TimelineClipType.Pointer;
@@ -131,6 +143,30 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         {
             m_animationTrackClips[i].RefreshPosition(p_zoomLevel);
             m_animationTrackClips[i].RefreshWidth(p_zoomLevel);
+        }
+    }
+
+    public DanceData ExportDanceData()
+    {
+        ReadyDanceData();
+        return m_danceData;
+    }
+
+    public void ReadyDanceData()
+    {
+        if( m_danceData == null )
+        {
+            m_danceData = new DanceData();
+        }
+
+        m_danceData.TotalDuration = m_timeIndicator.GetTotalDuration();
+
+        // Animation Data
+        for( int i = 0 ; i < m_animationTrackClips.Count ; i++ )
+        {
+            SavedAnimationData temp = new SavedAnimationData();
+            temp = m_animationTrackClips[i].SavedAnimationData;
+            m_danceData.AnimationDatas.Add(temp);
         }
     }
 }

@@ -35,6 +35,11 @@ public class TimelineController : MonoBehaviour
         return m_currentTime;
     }
 
+    public float GetTotalDuration()
+    {
+        return m_totalTime;
+    }
+
     public Vector2 GetCurrentSetPosition()
     {
         return m_currentTime*VECTOR_DISTANCE_PER_SECOND*ZoomLevel;
