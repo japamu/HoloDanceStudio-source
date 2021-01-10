@@ -37,4 +37,13 @@ public class ChibiAnimator : MonoBehaviour
         m_animator.Play( p_animData.m_name, p_animData.m_animationLayer );
         DanceRecorder.Instance.RecordAnimation( p_animData );
     }
+
+    public void AnimateCharacter( AnimationData p_animData, bool p_record = true )
+    {
+        m_animator.Play( p_animData.m_name, p_animData.m_animationLayer );
+        if( p_record )
+        {
+            DanceRecorder.Instance.RecordAnimation( p_animData );
+        }
+    }
 }

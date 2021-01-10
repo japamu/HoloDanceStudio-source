@@ -26,13 +26,14 @@ public class TimelineController : MonoBehaviour
     private int m_zoomLevelIndex;
     private readonly float[] m_zoomLevelArray = {1f,2f,4f};
     public float ZoomLevel {get{ return m_zoomLevelArray[m_zoomLevelIndex]; }}
+    public bool IsTimeFlowing {get{ return m_bIsTimeFlowing; }}
 
 
     // private bool DanceRecorder.Instance.IsBeingDragged;
 
     public float GetCurrentTime()
     {
-        return m_currentTime;
+        return m_bIsTimeFlowing? m_currentTime: 0f;;
     }
 
     public float GetTotalDuration()
@@ -73,6 +74,7 @@ public class TimelineController : MonoBehaviour
         DanceRecorder.Instance.IsBeingDragged = false;
         float sliderToTime = m_indicator.value * m_totalTime;
         m_currentTime = sliderToTime;
+        DanceRecorder.Instance.RepositionIndex( m_currentTime );
         m_musicPlayer.OverrideSliderValue( sliderToTime, true );
     }
 

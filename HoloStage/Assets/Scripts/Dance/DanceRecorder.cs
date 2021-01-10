@@ -24,6 +24,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     private List<TimelineClip> m_animationTrackClips;
 
     private TimelineClip m_latestPointerClip;
+    private int[] m_trackIndex = {0,0};
     private float m_pointerDuration;
     
     public bool IsRecording{ get{ return b_isRecording; } }
@@ -37,6 +38,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         m_pointerTrackClips = new List<TimelineClip>();
         m_animationTrackClips = new List<TimelineClip>();
         b_unsorted = false;
+        m_trackIndex[0] = 0;
+        m_trackIndex[1] = 0;
     }
     protected override void Awake()
     {
@@ -49,6 +52,37 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         {
             return;
         }
+        else
+        {
+            SamplePointerRecord();
+        }
+        if( m_timeIndicator.IsTimeFlowing )
+        //Replay Timeline Clip Here
+        if( m_trackIndex[0] < m_animationTrackClips.Count )
+        {
+            if( m_timeIndicator.GetCurrentTime() >= m_animationTrackClips[ m_trackIndex[0] ].TimeStamp )
+            {
+                m_chibiAnimator.AnimateCharacter( m_animationTrackClips[ m_trackIndex[0] ].AnimationData , false );
+                m_trackIndex[0]++;
+            }
+        }
+        // for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+        // {
+
+        // }
+
+        
+    }
+
+    public void RepositionIndex( float p_time )
+    {
+        Debug.LogError("TrackIndex reset");
+        m_trackIndex[0] = 0;
+        m_trackIndex[1] = 0;
+    }
+
+    private void SamplePointerRecord()
+    {
         if( Input.GetKeyDown(KeyCode.Space) )
         {
             RecordAnimation( new SavedPointerData() );
@@ -66,8 +100,6 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             m_pointerDuration = 0;
         }
         m_pointerDuration += Time.deltaTime;
-
-        
     }
 
     public void OnRecordButtonPressed()

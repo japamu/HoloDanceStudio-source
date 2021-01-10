@@ -130,6 +130,7 @@ public class MusicPlayer : MonoBehaviour
         DanceRecorder.Instance.IsBeingDragged = false;
         float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
         m_audioSource.time = sliderToTime;
+        DanceRecorder.Instance.RepositionIndex( sliderToTime );
         m_timeIndicator.OverrideIndicatorValue( sliderToTime );
     }
 

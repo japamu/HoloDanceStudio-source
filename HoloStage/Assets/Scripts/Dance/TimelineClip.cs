@@ -18,6 +18,7 @@ public class TimelineClip : MonoBehaviour
     private AnimationData m_animData;
     private SavedPointerData m_savedPointerData;
     private SavedAnimationData m_savedAnimationData;
+    public AnimationData AnimationData{ get{return m_animData;} }
     public SavedPointerData SavedPointerData{ get{return m_savedPointerData;} }
     public SavedAnimationData SavedAnimationData{ get{return m_savedAnimationData;} }
     private bool m_pointerIsOver; 
