@@ -13,6 +13,7 @@ public class TimelineClip : MonoBehaviour
     private static float DEFAULT_DURATION = 0.1f;
     [SerializeField] private RectTransform m_rectTransform;
     private float m_timestamp;
+    public float TimeStamp{ get{return m_timestamp;} }
     private float m_duration;
     private AnimationData m_animData;
     private SavedPointerData m_savedPointerData;

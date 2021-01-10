@@ -132,6 +132,7 @@ public class TimelineController : MonoBehaviour
         m_bIsTimeFlowing = false;
         m_playButton.SetIcon( m_bIsTimeFlowing );
         m_musicPlayer.ForcePause();
+        DanceRecorder.Instance.SortClipOrder();
     }
 
     public void StopTimeFlow()
@@ -140,7 +141,7 @@ public class TimelineController : MonoBehaviour
         m_bIsTimeFlowing = false;
         m_currentTime = 0;
         UpdateIndicatorPosition();
-
+        DanceRecorder.Instance.SortClipOrder();
     }
 
     // Start is called before the first frame update
