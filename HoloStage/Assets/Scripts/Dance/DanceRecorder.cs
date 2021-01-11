@@ -16,6 +16,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     [Header("UI")]
     public RecorderButton[] m_recordButton;
     private bool b_isRecording;
+    private bool b_pointerIsRecording;
     private bool b_isBeingDragged;
     private bool b_unsorted;
     private DanceData m_danceData;
@@ -69,30 +70,25 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
                 m_trackIndex[0]++;
             }
         }
-        if( m_trackIndex[1] < m_pointerTrackClips.Count )
+        if( !b_pointerIsRecording && m_trackIndex[1] < m_pointerTrackClips.Count )
         {
             if( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp )
             {
-                Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint( m_timeIndicator.GetCurrentTime() );
-                m_follow.FollowPosition( pos );
-                if( m_pointerTrackClips[ m_trackIndex[1] ].GivenLastPoint )
+                if ( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp + m_pointerTrackClips[ m_trackIndex[1] ].Duration )
                 {
-                    Debug.Log("Next Track!");
+                    Debug.Log("Skip Track!");
                     m_trackIndex[1]++;
                 }
-
-                // if( m_lastPoint != pos )
-                // {
-                //     Debug.Log("New Position");
-                //     m_follow.FollowPosition( pos, isLast );
-                //     if( isLast )
-                //     {
-                //         m_trackIndex[1]++;
-                //         m_clipPointIndex = 0;
-                //     }
-                // }
-                // m_lastPoint = pos;
-                // if( m_pointerTrackClips[ m_trackIndex[1] ]. )
+                else if( m_pointerTrackClips[ m_trackIndex[1] ].GivePoint( m_timeIndicator.GetCurrentTime() ) )
+                {
+                    Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint();
+                    m_follow.FollowPosition( pos );
+                    if( m_pointerTrackClips[ m_trackIndex[1] ].GivenLastPoint )
+                    {
+                        Debug.Log("Next Track!");
+                        m_trackIndex[1]++;
+                    }
+                }
             }
         }
 
@@ -117,12 +113,15 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         {
             RecordAnimation( m_follow.PointerPosition );
             m_pointerDuration = 0;
+            b_pointerIsRecording = true;
         }
         else if ( Input.GetMouseButton(1) )
         {
             // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
+            m_pointerDuration += Time.deltaTime;
+            b_pointerIsRecording = true;
         }
         else if ( Input.GetMouseButtonUp(1) )
         {
@@ -130,8 +129,9 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
             m_pointerDuration = 0;
+            b_pointerIsRecording = false;
         }
-        m_pointerDuration += Time.deltaTime;
+        
     }
 
     public void OnRecordButtonPressed()

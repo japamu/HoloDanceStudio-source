@@ -10,11 +10,13 @@ public enum TimelineClipType{
 public class TimelineClip : MonoBehaviour
 {
     private static float DEFAULT_WIDTH = 50;
-    private static float DEFAULT_DURATION = 0.1f;
+    public static float DEFAULT_DURATION = 0.05f;
     [SerializeField] private RectTransform m_rectTransform;
     private float m_timestamp;
     public float TimeStamp{ get{return m_timestamp;} }
     private float m_duration;
+    public float Duration{ get{return m_duration;} }
+
     private float m_localTimer;
     private int m_localIndex;
     private AnimationData m_animData;
@@ -123,10 +125,22 @@ public class TimelineClip : MonoBehaviour
         m_localIndex = 0;
     }
 
-    public Vector3 GetPoint( float p_time )
+    public bool GivePoint( float p_time )
+    {
+        if(  p_time >= m_timestamp + ( (float)m_localIndex*DEFAULT_DURATION ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public Vector3 GetPoint()
     {
         // float offsetVal = p_time - m_localTimer;
-        float offsetVal = p_time;
+        // float offsetVal = p_time;
         Vector3 val = m_pointerPositions[m_localIndex];
         m_localIndex++;
         return val;
@@ -171,7 +185,8 @@ public class TimelineClip : MonoBehaviour
         }
         else
         {
-            Vector3 d = GetPoint( debugTime );
+            GivePoint( debugTime );
+            Vector3 d = GetPoint();
             Debug.Log( $"Point: {d}" );
             debugTime += 0.05f;
 

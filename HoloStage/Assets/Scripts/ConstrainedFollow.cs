@@ -111,8 +111,8 @@ public class ConstrainedFollow : MonoBehaviour
 
     public void FollowPosition ( Vector3 p_pointerData )
     {
-        m_target.position = p_pointerData;
-        // m_target.DOMove( p_pointerData, 0.1f );
+        DOTween.Kill( m_target );
+        m_target.DOMove( p_pointerData, TimelineClip.DEFAULT_DURATION ).SetEase(Ease.Linear);
         // m_bIsFollowingTrack = false;
     }
 
