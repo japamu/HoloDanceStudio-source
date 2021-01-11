@@ -32,7 +32,9 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     private Vector3 m_lastPoint;
     
     public bool IsRecording{ get{ return b_isRecording; } }
+    public bool IsTimeFlowing{ get{ return m_timeIndicator.IsTimeFlowing; } }
     public bool IsBeingDragged{ get{ return b_isBeingDragged; } set {b_isBeingDragged = value;}  }
+    public bool AfterLastRecorded{ get{ return m_trackIndex[1]>= m_pointerTrackClips.Count; }  }
 
 
     void Start()
@@ -52,41 +54,40 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private void Update()
     {
-        if( !IsRecording )
-        {
-            return;
-        }
-        else
+        if( IsRecording )
         {
             PointerRecord();
         }
         if( m_timeIndicator.IsTimeFlowing )
-        //Replay Timeline Clip Here
-        if( m_trackIndex[0] < m_animationTrackClips.Count )
         {
-            if( m_timeIndicator.GetCurrentTime() >= m_animationTrackClips[ m_trackIndex[0] ].TimeStamp )
+            //Replay Timeline Clip Here
+            if( m_trackIndex[0] < m_animationTrackClips.Count )
             {
-                m_chibiAnimator.AnimateCharacter( m_animationTrackClips[ m_trackIndex[0] ].AnimationData , false );
-                m_trackIndex[0]++;
-            }
-        }
-        if( !b_pointerIsRecording && m_trackIndex[1] < m_pointerTrackClips.Count )
-        {
-            if( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp )
-            {
-                if ( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp + m_pointerTrackClips[ m_trackIndex[1] ].Duration )
+                if( m_timeIndicator.GetCurrentTime() >= m_animationTrackClips[ m_trackIndex[0] ].TimeStamp )
                 {
-                    Debug.Log("Skip Track!");
-                    m_trackIndex[1]++;
+                    m_chibiAnimator.AnimateCharacter( m_animationTrackClips[ m_trackIndex[0] ].AnimationData , false );
+                    m_trackIndex[0]++;
                 }
-                else if( m_pointerTrackClips[ m_trackIndex[1] ].GivePoint( m_timeIndicator.GetCurrentTime() ) )
+            }
+            //Replay Pointer Tracks
+            if( !b_pointerIsRecording && m_trackIndex[1] < m_pointerTrackClips.Count )
+            {
+                if( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp )
                 {
-                    Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint();
-                    m_follow.FollowPosition( pos );
-                    if( m_pointerTrackClips[ m_trackIndex[1] ].GivenLastPoint )
+                    if ( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp + m_pointerTrackClips[ m_trackIndex[1] ].Duration )
                     {
-                        Debug.Log("Next Track!");
+                        Debug.Log("Skip Track!");
                         m_trackIndex[1]++;
+                    }
+                    else if( m_pointerTrackClips[ m_trackIndex[1] ].GivePoint( m_timeIndicator.GetCurrentTime() ) )
+                    {
+                        Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint();
+                        m_follow.FollowPosition( pos );
+                        if( m_pointerTrackClips[ m_trackIndex[1] ].GivenLastPoint )
+                        {
+                            Debug.Log("Next Track!");
+                            m_trackIndex[1]++;
+                        }
                     }
                 }
             }

@@ -51,6 +51,10 @@ public class ConstrainedFollow : MonoBehaviour
         {
             return;
         }
+        if( !DanceRecorder.Instance.IsRecording && DanceRecorder.Instance.IsTimeFlowing && !DanceRecorder.Instance.AfterLastRecorded )
+        {
+            return;
+        }
         if( m_bIsMobile )
         {
             //Control Scheme for Mobile
@@ -111,8 +115,10 @@ public class ConstrainedFollow : MonoBehaviour
 
     public void FollowPosition ( Vector3 p_pointerData )
     {
+        // m_bIsFollowingTrack = true;
         DOTween.Kill( m_target );
         m_target.DOMove( p_pointerData, TimelineClip.DEFAULT_DURATION ).SetEase(Ease.Linear);
+        // m_target.DOMove( p_pointerData, TimelineClip.DEFAULT_DURATION ).SetEase(Ease.Linear).OnComplete( ()=>{ m_bIsFollowingTrack = false;}  );
         // m_bIsFollowingTrack = false;
     }
 
