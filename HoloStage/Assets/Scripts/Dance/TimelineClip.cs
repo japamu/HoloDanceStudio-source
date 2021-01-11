@@ -15,7 +15,10 @@ public class TimelineClip : MonoBehaviour
     private float m_timestamp;
     public float TimeStamp{ get{return m_timestamp;} }
     private float m_duration;
+    private float m_localTimer;
+    private int m_localIndex;
     private AnimationData m_animData;
+    private List<Vector3> m_pointerPositions;
     private SavedPointerData m_savedPointerData;
     private SavedAnimationData m_savedAnimationData;
     public AnimationData AnimationData{ get{return m_animData;} }
@@ -51,10 +54,19 @@ public class TimelineClip : MonoBehaviour
         m_savedAnimationData.timestamp = m_timestamp;
     }
 
+    public void SetPointerData( Vector3 p_pointerData )
+    {
+        m_pointerPositions = new List<Vector3>();
+        m_pointerPositions.Add( p_pointerData );
+        m_savedPointerData = new SavedPointerData();
+        m_savedPointerData.timestamp = m_timestamp;
+    }
+
     public void SetTimestamp( float p_timestamp, Vector2 p_position )
     {
         m_timestamp = p_timestamp;
         SetPosition(p_position);
+        m_localTimer = 0;
     }
 
     public void SetPosition( Vector2 p_position )
@@ -93,6 +105,44 @@ public class TimelineClip : MonoBehaviour
         }
     }
 
+    public void AddPoint( Vector3 p_pointerData, float p_time )
+    {
+        //p_time = 0.12f
+        float offsetVal = p_time - m_localTimer;
+        //offsetval = 0.12f
+        if( offsetVal > DEFAULT_DURATION )
+        {
+            m_pointerPositions.Add( p_pointerData );
+            m_localTimer = p_time - (offsetVal-DEFAULT_DURATION);
+        }
+    }
+
+    public void ResetLocalIndex()
+    {
+        m_localIndex = 0;
+    }
+
+    public Vector3 GetPoint( float p_time )
+    {
+        // float offsetVal = p_time - m_localTimer;
+        float offsetVal = p_time;
+        Vector3 val = m_pointerPositions[m_localIndex];
+        return val;
+        //offsetval = 0.12f
+        // if( offsetVal > DEFAULT_DURATION )
+        // {
+        //     m_localTimer = p_time - (offsetVal-DEFAULT_DURATION);
+        //     m_localIndex++;
+
+        //     if( m_localIndex >= m_pointerPositions.Count )
+        //     {
+        //         p_isLast = true;
+        //     }
+        //     return val;
+        // }
+        // return Vector3.zero;
+    }
+
     private void Update()
     {
         if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
@@ -107,7 +157,7 @@ public class TimelineClip : MonoBehaviour
         DanceRecorder.Instance.RemoveClip(this);
         Destroy( this.gameObject );
     }
-
+    float debugTime = 0;
     public void onPress()
     {
         if( m_callback!= null )
@@ -116,6 +166,17 @@ public class TimelineClip : MonoBehaviour
             Debug.Log( $"Animation Layer:{m_savedAnimationData.animType} | Animation Index:{m_savedAnimationData.animIndex} " );
             //m_savedAnimationData.animType = p_animData.m_animationLayer;
             //m_savedAnimationData.animIndex = p_animIndex;
+        }
+        else
+        {
+            Vector3 d = GetPoint( debugTime );
+            Debug.Log( $"Point: {d}" );
+            debugTime += 0.05f;
+
+            // for( int i = 0 ; i < m_pointerPositions.Count ; i++ )
+            // {
+            //     Debug.Log($"Point: {m_pointerPositions[i]}");
+            // }
         }
     }
 

@@ -10,6 +10,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public TimelineController m_timeIndicator;
     public Transform[] m_track;
     public ChibiAnimator m_chibiAnimator;
+    public ConstrainedFollow m_follow;
     public AnimationLibrary m_animationLibrary;
 
     [Header("UI")]
@@ -25,7 +26,9 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private TimelineClip m_latestPointerClip;
     private int[] m_trackIndex = {0,0};
+    private int m_clipPointIndex = 0;
     private float m_pointerDuration;
+    private Vector3 m_lastPoint;
     
     public bool IsRecording{ get{ return b_isRecording; } }
     public bool IsBeingDragged{ get{ return b_isBeingDragged; } set {b_isBeingDragged = value;}  }
@@ -54,7 +57,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         }
         else
         {
-            SamplePointerRecord();
+            PointerRecord();
         }
         if( m_timeIndicator.IsTimeFlowing )
         //Replay Timeline Clip Here
@@ -66,10 +69,28 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
                 m_trackIndex[0]++;
             }
         }
-        // for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
-        // {
+        if( m_trackIndex[1] < m_pointerTrackClips.Count )
+        {
+            if( m_timeIndicator.GetCurrentTime() >= m_pointerTrackClips[ m_trackIndex[1] ].TimeStamp )
+            {
+                Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint( m_timeIndicator.GetCurrentTime() );
+                m_follow.FollowPosition( pos );
+                m_trackIndex[1]++;
 
-        // }
+                // if( m_lastPoint != pos )
+                // {
+                //     Debug.Log("New Position");
+                //     m_follow.FollowPosition( pos, isLast );
+                //     if( isLast )
+                //     {
+                //         m_trackIndex[1]++;
+                //         m_clipPointIndex = 0;
+                //     }
+                // }
+                // m_lastPoint = pos;
+                // if( m_pointerTrackClips[ m_trackIndex[1] ]. )
+            }
+        }
 
         
     }
@@ -79,24 +100,31 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         Debug.LogError("TrackIndex reset");
         m_trackIndex[0] = 0;
         m_trackIndex[1] = 0;
+        for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+        {
+            m_pointerTrackClips[i].ResetLocalIndex();
+        }
+        
     }
 
-    private void SamplePointerRecord()
+    private void PointerRecord()
     {
-        if( Input.GetKeyDown(KeyCode.Space) )
+        if( Input.GetMouseButtonDown(1) )
         {
-            RecordAnimation( new SavedPointerData() );
+            RecordAnimation( m_follow.PointerPosition );
             m_pointerDuration = 0;
         }
-        else if ( Input.GetKey(KeyCode.Space) )
+        else if ( Input.GetMouseButton(1) )
         {
             // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
+            m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
         }
-        else if ( Input.GetKeyUp(KeyCode.Space) )
+        else if ( Input.GetMouseButtonUp(1) )
         {
             // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
+            m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
             m_pointerDuration = 0;
         }
         m_pointerDuration += Time.deltaTime;
@@ -131,7 +159,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     }
 
-    public void RecordAnimation( SavedPointerData p_data )
+    //call this every .1 seconds to record movement
+    public void RecordAnimation( Vector3 p_data )
     {
         if( !b_isRecording )
         {
@@ -140,6 +169,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
         temp.ClipType = TimelineClipType.Pointer;
+        temp.SetPointerData( p_data );
+
         m_latestPointerClip = temp;
         if( b_unsorted == false && m_pointerTrackClips.Count > 0 && temp.TimeStamp < m_pointerTrackClips.Last<TimelineClip>().TimeStamp )
         {

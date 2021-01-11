@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public class ConstrainedFollow : MonoBehaviour
@@ -18,6 +19,10 @@ public class ConstrainedFollow : MonoBehaviour
     private Joystick m_joystick;
     public bool m_debugMobile;
 
+    public Vector3 PointerPosition{ get{return m_target.position;} }
+
+    private bool m_bIsFollowingTrack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +31,7 @@ public class ConstrainedFollow : MonoBehaviour
         if( m_debugMobile )
             m_bIsMobile = true;
         #endif
+        m_bIsFollowingTrack = false;
     }
 
     public void SetJoystick( Joystick p_joystick )
@@ -57,7 +63,7 @@ public class ConstrainedFollow : MonoBehaviour
         }
         else
         {
-            if( !Input.GetMouseButton(0) )
+            if( !Input.GetMouseButton(1) && DanceRecorder.Instance.IsRecording )
             {
                 return;
             }
@@ -101,6 +107,13 @@ public class ConstrainedFollow : MonoBehaviour
                 m_lastPos = m_target.position;
             }
         }
+    }
+
+    public void FollowPosition ( Vector3 p_pointerData )
+    {
+        m_target.position = p_pointerData;
+        m_target.DOMove( p_pointerData, 0.1f );
+        m_bIsFollowingTrack = false;
     }
 
     Vector2 GetPositionInBounds( Vector2 p_position )
