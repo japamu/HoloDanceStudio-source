@@ -29,6 +29,7 @@ public class TimelineClip : MonoBehaviour
 
     private TimelineClipType m_timelineClip;
     public TimelineClipType ClipType{ get{return m_timelineClip;} set{m_timelineClip=value;} }
+    public bool GivenLastPoint{ get{  return m_localIndex >= (m_pointerPositions.Count); } }
 
     public void PointerOver( bool p_pointerIsOver )
     {
@@ -127,6 +128,7 @@ public class TimelineClip : MonoBehaviour
         // float offsetVal = p_time - m_localTimer;
         float offsetVal = p_time;
         Vector3 val = m_pointerPositions[m_localIndex];
+        m_localIndex++;
         return val;
         //offsetval = 0.12f
         // if( offsetVal > DEFAULT_DURATION )

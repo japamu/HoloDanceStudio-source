@@ -112,8 +112,8 @@ public class ConstrainedFollow : MonoBehaviour
     public void FollowPosition ( Vector3 p_pointerData )
     {
         m_target.position = p_pointerData;
-        m_target.DOMove( p_pointerData, 0.1f );
-        m_bIsFollowingTrack = false;
+        // m_target.DOMove( p_pointerData, 0.1f );
+        // m_bIsFollowingTrack = false;
     }
 
     Vector2 GetPositionInBounds( Vector2 p_position )

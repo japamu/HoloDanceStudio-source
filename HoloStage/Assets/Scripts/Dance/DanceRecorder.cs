@@ -75,7 +75,11 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             {
                 Vector3 pos = m_pointerTrackClips[ m_trackIndex[1] ].GetPoint( m_timeIndicator.GetCurrentTime() );
                 m_follow.FollowPosition( pos );
-                m_trackIndex[1]++;
+                if( m_pointerTrackClips[ m_trackIndex[1] ].GivenLastPoint )
+                {
+                    Debug.Log("Next Track!");
+                    m_trackIndex[1]++;
+                }
 
                 // if( m_lastPoint != pos )
                 // {
