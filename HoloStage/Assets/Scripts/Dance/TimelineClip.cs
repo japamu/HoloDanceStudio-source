@@ -16,6 +16,7 @@ public class TimelineClip : MonoBehaviour
     public float TimeStamp{ get{return m_timestamp;} }
     private float m_duration;
     public float Duration{ get{return m_duration;} }
+    public float TimeStampFinish{ get{return m_timestamp+m_duration;} }
 
     private float m_localTimer;
     private int m_localIndex;

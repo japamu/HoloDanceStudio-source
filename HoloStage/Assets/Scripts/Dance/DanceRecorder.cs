@@ -99,8 +99,43 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public void RepositionIndex( float p_time )
     {
         Debug.LogError("TrackIndex reset");
-        m_trackIndex[0] = 0;
-        m_trackIndex[1] = 0;
+
+        //if time = 0, then 0
+        if( p_time == 0 )
+        {
+            m_trackIndex[0] = 0;
+            m_trackIndex[1] = 0;
+        }
+        else
+        {
+            // look for spot 
+            for( int i = 0 ; i < m_animationTrackClips.Count ; i++ )
+            {
+                if( p_time < m_animationTrackClips[i].TimeStamp )
+                {
+                    m_trackIndex[0] = i;
+                    Debug.Log($"Animation Track Reposition Index: {m_trackIndex[0]}");
+                    break;
+                }
+            }
+            for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+            {
+                if( p_time < m_pointerTrackClips[i].TimeStamp )
+                {
+                    m_trackIndex[1] = i;
+
+                    Debug.Log($"Animation Track Reposition Index: {m_trackIndex[1]}");
+                    break;
+                }
+                else if( p_time < m_pointerTrackClips[i].TimeStampFinish )
+                {
+                    m_trackIndex[1] = i;
+                    Debug.Log($"Animation Track Reposition Index: {m_trackIndex[1]}");
+                    break;
+                }
+            }
+        }
+
         for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
         {
             m_pointerTrackClips[i].ResetLocalIndex();
