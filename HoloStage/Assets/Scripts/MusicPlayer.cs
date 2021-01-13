@@ -107,6 +107,7 @@ public class MusicPlayer : MonoBehaviour
         else{
             m_playButton.SetIcon( false );
         }
+        DanceRecorder.Instance.RepositionIndex( 0 );
     }
 
     public void OnSliderChanged()
