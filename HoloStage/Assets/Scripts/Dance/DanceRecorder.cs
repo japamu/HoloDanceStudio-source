@@ -164,6 +164,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
+            m_latestPointerClip.FinishPointerData();
             m_pointerDuration = 0;
             b_pointerIsRecording = false;
         }
@@ -302,6 +303,13 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             SavedAnimationData temp = new SavedAnimationData();
             temp = m_animationTrackClips[i].SavedAnimationData;
             m_danceData.AnimationDatas.Add(temp);
+        }
+        // Pointer Data
+        for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
+        {
+            SavedPointerData temp = new SavedPointerData();
+            temp = m_pointerTrackClips[i].SavedPointerData;
+            m_danceData.PointerDatas.Add(temp);
         }
     }
 }

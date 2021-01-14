@@ -65,6 +65,13 @@ public class TimelineClip : MonoBehaviour
         m_savedPointerData = new SavedPointerData();
         m_savedPointerData.timestamp = m_timestamp;
     }
+    public void FinishPointerData()
+    {
+        for( int i = 0 ; i < m_pointerPositions.Count ; i++ )
+        {
+            m_savedPointerData.pointerPositions.Add( m_pointerPositions[i] );
+        }
+    }
 
     public void SetTimestamp( float p_timestamp, Vector2 p_position )
     {
