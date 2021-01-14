@@ -312,6 +312,11 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             m_danceData.PointerDatas.Add(temp);
         }
     }
+
+    public void ImportDanceData( DanceData p_danceData )
+    {
+        m_danceData = p_danceData;
+    }
 }
 
 //50 Width for 0.1 second

@@ -1172,6 +1172,7 @@ MonoBehaviour:
   - {fileID: 4140399963676342049}
   - {fileID: 1444978722327179285}
   m_chibiAnimator: {fileID: 0}
+  m_follow: {fileID: 0}
   m_animationLibrary: {fileID: 0}
   m_recordButton:
   - {fileID: 2621776324317641614}
@@ -2692,7 +2693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7555424708716231250, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveButton
+      value: LoadButton
       objectReference: {fileID: 0}
     - target: {fileID: 7555424708716231250, guid: 116fd9578b524fe4cb3db6b7bd6ed09a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

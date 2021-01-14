@@ -24,6 +24,13 @@ public class DanceExporter : MonoBehaviour
         StartCoroutine( ShowSaveDanceDataCoroutine() );
         // string json = JsonUtility.ToJson( m_danceData , true);
     }
+    public void LoadButton()
+    {
+        Debug.Log("Load Button Pressed");
+        FileBrowser.SetDefaultFilter(".hds");
+        StartCoroutine( ShowLoadDanceDataCoroutine() );
+        // string json = JsonUtility.ToJson( m_danceData , true);
+    }
 
     IEnumerator ShowSaveDanceDataCoroutine()
 	{
@@ -62,6 +69,48 @@ public class DanceExporter : MonoBehaviour
         p_path = "file://"+p_path;
         #endif
         FileBrowserHelpers.WriteTextToFile( p_path , json );
+
+    }
+
+    IEnumerator ShowLoadDanceDataCoroutine()
+	{
+        FileBrowser.SetFilters( false, new FileBrowser.Filter( "Holo Dance Studio Data", ".hds" ) );
+        FileBrowser.SetDefaultFilter(".hds");
+		// Show a load file dialog and wait for a response from user
+		// Load file/folder: both, Allow multiple selection: true
+		// Initial path: default (Documents), Initial filename: empty
+		// Title: "Load File", Submit button text: "Load"
+		yield return FileBrowser.WaitForLoadDialog( FileBrowser.PickMode.Files , false, null, "HoloDanceData.hds", "Choose Holo Dance Studio Data", "Load" );
+
+		// Dialog is closed
+		// Print whether the user has selected some files/folders or cancelled the operation (FileBrowser.Success)
+		Debug.Log( FileBrowser.Success );
+
+		if( FileBrowser.Success )
+		{
+			// Print paths of the selected files (FileBrowser.Result) (null, if FileBrowser.Success is false)
+			for( int i = 0; i < FileBrowser.Result.Length; i++ )
+			{
+				Debug.Log( FileBrowser.Result[i] );
+                LoadDataOn( FileBrowser.Result[i] );
+				// StartCoroutine( saveda( FileBrowser.Result[i] ) );
+			}
+
+			// Read the bytes of the first file via FileBrowserHelpers
+			// Contrary to File.ReadAllBytes, this function works on Android 10+, as well
+			// byte[] bytes = FileBrowserHelpers.ReadBytesFromFile( FileBrowser.Result[0] );
+		}
+	}
+    private void LoadDataOn( string p_path )
+    {
+        DanceData dData = JsonUtility.FromJson<DanceData>( FileBrowserHelpers.ReadTextFromFile( p_path ) );
+        m_danceRecorder.ClearTrack();
+        m_danceRecorder.ImportDanceData( dData );
+        // string json = JsonUtility.ToJson( m_danceRecorder.ExportDanceData() , true);
+        // #if UNITY_ANDROID
+        // p_path = "file://"+p_path;
+        // #endif
+        // FileBrowserHelpers.WriteTextToFile( p_path , json );
 
     }
 }
