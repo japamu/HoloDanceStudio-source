@@ -42,10 +42,19 @@ public class HotkeySystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+    void Update()
+    {
+        if( m_hotkeyWindow.activeInHierarchy )
+        {
+            foreach( KeyValuePair<KeyCode,HotkeyButton> item in HotkeyButtons )
+            {
+                if( Input.GetKeyDown( item.Key ) )
+                {
+                    OpenSelectAnimationWindow( item.Value );
+                }
+            }
+        }        
+    }
 
     public void SetupMobilecontrolPanel()
     {
