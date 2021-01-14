@@ -54,7 +54,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private void Update()
     {
-        if( IsRecording )
+        if( IsRecording && IsTimeFlowing)
         {
             PointerRecord();
         }
@@ -124,13 +124,13 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
                 {
                     m_trackIndex[1] = i;
 
-                    Debug.Log($"Animation Track Reposition Index: {m_trackIndex[1]}");
+                    Debug.Log($"Pointer Track Reposition Index: {m_trackIndex[1]}");
                     break;
                 }
                 else if( p_time < m_pointerTrackClips[i].TimeStampFinish )
                 {
                     m_trackIndex[1] = i;
-                    Debug.Log($"Animation Track Reposition Index: {m_trackIndex[1]}");
+                    Debug.Log($"Pointer Track Reposition Index: {m_trackIndex[1]}");
                     break;
                 }
             }
@@ -138,7 +138,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
         for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
         {
-            m_pointerTrackClips[i].ResetLocalIndex();
+            m_pointerTrackClips[i].ResetLocalIndex( p_time );
         }
         
     }
@@ -181,7 +181,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void RecordAnimation( AnimationData p_data )
     {
-        if( !b_isRecording )
+        if( !b_isRecording || !IsTimeFlowing)
         {
             return;
         }
@@ -202,7 +202,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     //call this every .1 seconds to record movement
     public void RecordAnimation( Vector3 p_data )
     {
-        if( !b_isRecording )
+        if( !b_isRecording || !IsTimeFlowing )
         {
             return;
         }

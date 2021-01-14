@@ -121,13 +121,41 @@ public class TimelineClip : MonoBehaviour
         }
     }
 
-    public void ResetLocalIndex()
+    public void ResetLocalIndex( float p_time)
     {
         m_localIndex = 0;
+        if( m_timelineClip == TimelineClipType.Pointer )
+        {
+            //Clip is after current time
+            if( p_time > m_timestamp )
+            {
+                //clip is outside time
+                if( p_time > m_timestamp+m_duration )
+                {
+                    m_localIndex = m_pointerPositions.Count;
+                }
+                else
+                {
+                    //find the correct index
+                    while( p_time >= m_timestamp + ( (float)m_localIndex*DEFAULT_DURATION )  )
+                    {
+                        m_localIndex++;
+                    }
+                }
+            }
+            //Clip is before current time
+            else if ( p_time < m_timestamp )
+            {
+                m_localIndex = 0;
+            }
+        }
     }
 
     public bool GivePoint( float p_time )
     {
+        //Check if time is in middle
+        //m_localIndex = (int)Mathf.Floor((p_time - m_timestamp)/0.1f);
+
         if(  p_time >= m_timestamp + ( (float)m_localIndex*DEFAULT_DURATION ) )
         {
             return true;
