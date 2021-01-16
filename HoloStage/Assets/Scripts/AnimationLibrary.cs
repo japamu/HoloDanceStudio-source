@@ -22,6 +22,21 @@ public class AnimationLibrary : ScriptableObject
                 return 0;
         }
     }
+    public AnimationData GetAnimationData( int p_typeIndex, int p_animIndex )
+    {
+        switch( p_typeIndex )
+        {
+            case (int)AnimationType.Eye:
+                return eyeAnimation[p_animIndex];
+            
+            case (int)AnimationType.Mouth:
+                return mouthAnimation[p_animIndex];
+                
+            default:
+                Debug.LogError("No such animation");
+                return null;
+        }
+    }
 }
 
 

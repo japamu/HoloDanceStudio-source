@@ -43,7 +43,11 @@ public class TimelineController : MonoBehaviour
 
     public Vector2 GetCurrentSetPosition()
     {
-        return m_currentTime*VECTOR_DISTANCE_PER_SECOND*ZoomLevel;
+        return GetSetPositionOfTime( m_currentTime );
+    }
+    public Vector2 GetSetPositionOfTime( float p_time )
+    {
+        return p_time*VECTOR_DISTANCE_PER_SECOND*ZoomLevel;
     }
 
     public static float ConvertTimeToPosition( float p_duration, float p_zoomLevel = 1f )
@@ -190,6 +194,13 @@ public class TimelineController : MonoBehaviour
             m_totalTime += TIME_TO_EXTEND;
             OnTotalTimeValueChanged();
         }
+    }
+
+    public void SetTimelineLength ( float p_totalTime )
+    {
+        m_timelineRect.sizeDelta = p_totalTime * VECTOR_DISTANCE_PER_SECOND * ZoomLevel;
+        m_totalTime = p_totalTime;
+        OnTotalTimeValueChanged();
     }
 
     private void FinishTimeline()
