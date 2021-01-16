@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TimelineClipType{
     Pointer = 0,
@@ -17,6 +18,7 @@ public class TimelineClip : MonoBehaviour
     private float m_duration;
     public float Duration{ get{return m_duration;} }
     public float TimeStampFinish{ get{return m_timestamp+m_duration;} }
+    public Image m_icon;
 
     private float m_localTimer;
     private int m_localIndex;
@@ -51,6 +53,7 @@ public class TimelineClip : MonoBehaviour
     }
     public void SetAnimationData( AnimationData p_animData, int p_animIndex )
     {
+        m_icon.sprite = DanceRecorder.Instance.m_iconLibrary.m_animationIcon[p_animData.m_animationLayer];
         m_animData = p_animData;
         m_savedAnimationData = new SavedAnimationData();
         m_savedAnimationData.animType = p_animData.m_animationLayer;
@@ -60,6 +63,7 @@ public class TimelineClip : MonoBehaviour
 
     public void SetPointerData( Vector3 p_pointerData )
     {
+        m_icon.sprite = DanceRecorder.Instance.m_iconLibrary.m_pointerIcon;
         m_pointerPositions = new List<Vector3>();
         m_pointerPositions.Add( p_pointerData );
         m_savedPointerData = new SavedPointerData();
@@ -67,7 +71,7 @@ public class TimelineClip : MonoBehaviour
     }
     public void SetPointerListData ( List<Vector2> p_pointerDatas )
     {
-
+        m_icon.sprite = DanceRecorder.Instance.m_iconLibrary.m_pointerIcon;
         m_pointerPositions = new List<Vector3>();
         for( int i = 0 ; i < p_pointerDatas.Count ; i++ )
         {

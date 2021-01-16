@@ -884,6 +884,10 @@ PrefabInstance:
       propertyPath: m_follow
       value: 
       objectReference: {fileID: 996142731}
+    - target: {fileID: 156654500817899068, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_iconLibrary
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a4d447804740ee40b3ed5e1167b3330, type: 2}
     - target: {fileID: 214684414049937825, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0

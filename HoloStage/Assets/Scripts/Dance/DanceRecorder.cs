@@ -12,6 +12,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public ChibiAnimator m_chibiAnimator;
     public ConstrainedFollow m_follow;
     public AnimationLibrary m_animationLibrary;
+    public IconLibrary m_iconLibrary;
 
     [Header("UI")]
     public RecorderButton[] m_recordButton;
