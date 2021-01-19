@@ -609,6 +609,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &1951064911 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1317424544944456119, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+  m_PrefabInstance: {fileID: 6944451562405619337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!225 &1586646483649788470 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 4435374740167706898, guid: 9a40e4f312a46b243a642bdea12adc48, type: 3}
@@ -1849,29 +1854,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
-      propertyPath: m_hideCanvasGroup.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
-      propertyPath: m_hideCanvasGroup.Array.data[1]
-      value: 
-      objectReference: {fileID: 1692636805}
-    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
-      propertyPath: m_hideCanvasGroup.Array.data[2]
+      propertyPath: m_hideCanvasGroup.Array.data[0]
       value: 
       objectReference: {fileID: 3280307390039493389}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
-      propertyPath: m_hideCanvasGroup.Array.data[3]
+      propertyPath: m_hideCanvasGroup.Array.data[1]
       value: 
       objectReference: {fileID: 1119121178}
+    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+      propertyPath: m_hideCanvasGroup.Array.data[2]
+      value: 
+      objectReference: {fileID: 3056092296520111363}
+    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+      propertyPath: m_hideCanvasGroup.Array.data[3]
+      value: 
+      objectReference: {fileID: 1692636805}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[4]
       value: 
       objectReference: {fileID: 1586646483649788470}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
-      propertyPath: m_hideCanvasGroup.Array.data[5]
+      propertyPath: m_canvasGroup
       value: 
-      objectReference: {fileID: 3056092296520111363}
+      objectReference: {fileID: 1951064911}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
 --- !u!1001 &7922756984873440202

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 17ced3a566a15f94c8f2ad52e7681f96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 008d652f5e1a68c4c9ab364a62d0dd90, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -200,8 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8465598c3f65a84abaaae391dbdfe1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_visibilityButton: {fileID: 1666486738}
+  m_canvasGroup: {fileID: 0}
   m_hideCanvasGroup:
-  - {fileID: 1317424544944456119}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -372,6 +374,8 @@ GameObject:
   - component: {fileID: 589120529098505510}
   - component: {fileID: 589120529098505511}
   - component: {fileID: 5009414035330190600}
+  - component: {fileID: 1666486738}
+  - component: {fileID: 1666486734}
   m_Layer: 5
   m_Name: HideUIButton
   m_TagString: Untagged
@@ -499,6 +503,67 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1666486738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589120529098505506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243af48a65c9b1844912cd7ed937021b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_buttonIcon: {fileID: 589120527181797014}
+  m_iconSet:
+  - {fileID: 21300000, guid: 17ced3a566a15f94c8f2ad52e7681f96, type: 3}
+  - {fileID: 21300000, guid: 008d652f5e1a68c4c9ab364a62d0dd90, type: 3}
+--- !u!114 &1666486734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589120529098505506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7526460662960133114}
+          m_TargetAssemblyTypeName: HideUI, Assembly-CSharp
+          m_MethodName: ShowButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7526460662960133114}
+          m_TargetAssemblyTypeName: HideUI, Assembly-CSharp
+          m_MethodName: HideButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4282561819387340444
 GameObject:
   m_ObjectHideFlags: 0
