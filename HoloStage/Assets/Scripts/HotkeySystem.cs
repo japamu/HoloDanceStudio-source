@@ -50,7 +50,7 @@ public class HotkeySystem : MonoBehaviour
             {
                 if( Input.GetKeyDown( item.Key ) )
                 {
-                    OpenSelectAnimationWindow( item.Value );
+                    OpenSelectAnimationWindow( item.Value , true );
                 }
             }
         }        
@@ -106,6 +106,13 @@ public class HotkeySystem : MonoBehaviour
     {
         m_selAnimationWindow.gameObject.SetActive(true);
         m_selAnimationWindow.SetSelectedHotKey( m_button );
+    }
+    public void OpenSelectAnimationWindow( HotkeyButton m_button, bool p_cannotOpen)
+    {
+        if( p_cannotOpen == true && m_selAnimationWindow.gameObject.activeInHierarchy == true )
+        {
+            OpenSelectAnimationWindow(m_button);
+        }
     }
 
     public void ToggleHotkeyWindow( bool p_state )
