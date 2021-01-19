@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 4028338110270800149}
   - component: {fileID: 4028338110270800148}
   - component: {fileID: 3279499521107752404}
-  - component: {fileID: 4028338110270800140}
+  - component: {fileID: 3915029233680641484}
   m_Layer: 5
   m_Name: Exit_Canvas
   m_TagString: Untagged
@@ -741,7 +741,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &4028338110270800140
+--- !u!114 &3915029233680641484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -750,9 +750,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4028338110270800147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 139c4dd241eb8fd4488749f10f4a880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 09d833c084c4c7c498d4a90d15ea25a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_confirmationWindow: {fileID: 8211950356938343771}
 --- !u!1 &4050728959800179940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,9 +1145,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DanceRecorder, Assembly-CSharp
-        m_MethodName: ClearTrack
+      - m_Target: {fileID: 3915029233680641484}
+        m_TargetAssemblyTypeName: ExitApp, Assembly-CSharp
+        m_MethodName: CloseSoftware
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1307,7 +1308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7723565887947408784
 RectTransform:
   m_ObjectHideFlags: 0
