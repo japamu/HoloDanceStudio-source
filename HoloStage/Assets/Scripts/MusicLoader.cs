@@ -48,7 +48,14 @@ public class MusicLoader : MonoBehaviour
 
     public void OnMusicButtonPress()
     {
-        Debug.Log("MusicButton Pressed");
+        #if UNITY_ANDROID
+		    FileBrowser.SetFilters( false, new FileBrowser.Filter( "Audio", ".mp3", ".ogg") );
+		    FileBrowser.SetDefaultFilter( ".mp3" );
+			FileBrowser.SingleClickMode = true;
+        #else
+		    FileBrowser.SetFilters( false, new FileBrowser.Filter( "Audio", ".wav", ".ogg" ) );
+		    FileBrowser.SetDefaultFilter( ".wav" );
+        #endif
 		StartCoroutine( ShowLoadMusicCoroutine() );
     }
 

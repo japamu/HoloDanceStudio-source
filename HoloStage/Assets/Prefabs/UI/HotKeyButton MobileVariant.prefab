@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 8238231550107568314, guid: a01df71d20aeed040a976cbcb3cbef6d, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8634016017222800284, guid: a01df71d20aeed040a976cbcb3cbef6d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 280

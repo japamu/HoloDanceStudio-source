@@ -216,7 +216,8 @@ public class TimelineClip : MonoBehaviour
 
     private void Update()
     {
-        if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
+        // if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
+        if( Input.GetMouseButtonDown(1) && m_pointerIsOver )
         {
             RemoveFromTrack();
         }
