@@ -55,6 +55,9 @@ public class MusicPlayer : MonoBehaviour
         m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
         m_label_timeTotal.text =  Utils.TimeSpanToFormattedString( m_timespan_total );
         // m_label_timeTotal.text = m_timespan_total.ToString(@"mm\:ss");
+        m_audioSource.Pause();
+        m_audioSource.time = 0;
+        DanceRecorder.Instance.m_timeIndicator.SetTimelineLength( m_audioSource.clip.length );
 
     }
 
@@ -66,8 +69,8 @@ public class MusicPlayer : MonoBehaviour
             {
                 float sliderToTime = m_musicScrubber.value * m_audioSource.clip.length;
                 m_timespan_current = TimeSpan.FromSeconds( sliderToTime );
+                m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
             }
-            m_label_timeCurrent.text =  Utils.TimeSpanToFormattedString( m_timespan_current );
         }
         else
         {
@@ -100,7 +103,8 @@ public class MusicPlayer : MonoBehaviour
     {
         if( m_audioSource.clip != null )
         {
-            m_audioSource.Stop();
+            m_audioSource.Pause();
+            m_audioSource.time = 0;
             m_playButton.SetIcon( m_audioSource.isPlaying );
             UpdateMusicUI();
         }
@@ -146,6 +150,7 @@ public class MusicPlayer : MonoBehaviour
             m_musicScrubber.value = p_seconds/m_audioSource.clip.length;
             UpdateMusicUI();
         }
+        Debug.LogError($"override! + {p_seconds}");
     }
 
     public void OnVolumeSliderChanged(Slider p_slider)
