@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_visibilityButton: {fileID: 1666486738}
-  m_canvasGroup: {fileID: 0}
+  m_canvasGroup: {fileID: 1317424544944456119}
   m_hideCanvasGroup:
   - {fileID: 0}
   - {fileID: 0}

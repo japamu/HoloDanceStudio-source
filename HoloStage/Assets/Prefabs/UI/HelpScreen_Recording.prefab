@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 5861931204805052220}
   - component: {fileID: 3486410284063938226}
   m_Layer: 5
-  m_Name: HelpScreen
+  m_Name: HelpScreen_Recording
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4379,7 +4379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1456773752251008893, guid: 3fab2b2407e66a2468a84e94b59b6331, type: 3}
       propertyPath: m_Text
-      value: help
+      value: recording help
       objectReference: {fileID: 0}
     - target: {fileID: 1456773752251008893, guid: 3fab2b2407e66a2468a84e94b59b6331, type: 3}
       propertyPath: m_Color.r
