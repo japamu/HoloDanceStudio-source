@@ -8,7 +8,11 @@ public class HideUI : MonoBehaviour
     public ToggleIconButton m_visibilityButton;
     public CanvasGroup m_canvasGroup;
     public CanvasGroup[] m_hideCanvasGroup;
-    private bool m_hideState;
+    private bool m_hideState = true;
+    public void Start ()
+    {
+        m_hideState = true;
+    }
     public void ToggleHideUI( bool p_toggle )
     {
         m_hideState = p_toggle;
