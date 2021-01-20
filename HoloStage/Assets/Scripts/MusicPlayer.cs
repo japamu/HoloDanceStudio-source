@@ -9,7 +9,7 @@ public class MusicPlayer : MonoBehaviour
     public TimelineController m_timeIndicator;
     public AudioSource m_audioSource;
     public Text m_label_filename;
-    public ToggleIconButton m_playButton;
+    public ToggleIconButton[] m_playButtons;
     // public Button m_handleButton;
     public Slider m_musicScrubber;
     public ToggleIconButton m_muteButton;
@@ -25,7 +25,10 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         m_musicScrubber.interactable = false;
-        m_playButton.SetIcon(false);
+        for( int i = 0 ; i < m_playButtons.Length; i++ )
+        {
+            m_playButtons[i].SetIcon(false);
+        }
         m_musicSpeed = 1;
         // DanceRecorder.Instance.IsBeingDragged = false;
     }
@@ -96,7 +99,10 @@ public class MusicPlayer : MonoBehaviour
             {
                 m_audioSource.Play();
             }
-            m_playButton.SetIcon( m_audioSource.isPlaying );
+            for( int i = 0 ; i < m_playButtons.Length; i++ )
+            {
+                m_playButtons[i].SetIcon(m_audioSource.isPlaying);
+            }
         }
     }
     public void OnPressStopButton()
@@ -105,11 +111,17 @@ public class MusicPlayer : MonoBehaviour
         {
             m_audioSource.Pause();
             m_audioSource.time = 0;
-            m_playButton.SetIcon( m_audioSource.isPlaying );
+            for( int i = 0 ; i < m_playButtons.Length; i++ )
+            {
+                m_playButtons[i].SetIcon(m_audioSource.isPlaying);
+            }
             UpdateMusicUI();
         }
         else{
-            m_playButton.SetIcon( false );
+            for( int i = 0 ; i < m_playButtons.Length; i++ )
+            {
+                m_playButtons[i].SetIcon(false);
+            }
         }
         DanceRecorder.Instance.RepositionIndex( 0 );
     }

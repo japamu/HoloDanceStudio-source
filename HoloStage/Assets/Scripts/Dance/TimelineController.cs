@@ -12,7 +12,7 @@ public class TimelineController : MonoBehaviour
     private readonly Vector2 VECTOR_DISTANCE_PER_SECOND = new Vector2(500f, 0f);
 
     public MusicPlayer m_musicPlayer;
-    public ToggleIconButton m_playButton;
+    public ToggleIconButton[] m_playButtons;
     public Slider m_indicator;
     public RectTransform m_timelineRect;
     public Scrollbar m_timelineScrollBar;
@@ -124,7 +124,10 @@ public class TimelineController : MonoBehaviour
         {
             PauseTimeFlow();
         }
-        m_playButton.SetIcon( m_bIsTimeFlowing );
+        for( int i = 0 ; i < m_playButtons.Length; i++ )
+        {
+            m_playButtons[i].SetIcon(m_bIsTimeFlowing);
+        }
     }
 
     public void StartTimeFlow()
@@ -136,7 +139,10 @@ public class TimelineController : MonoBehaviour
     {
         Debug.LogError("Pause Time Flow");
         m_bIsTimeFlowing = false;
-        m_playButton.SetIcon( m_bIsTimeFlowing );
+        for( int i = 0 ; i < m_playButtons.Length; i++ )
+        {
+            m_playButtons[i].SetIcon(m_bIsTimeFlowing);
+        }
         m_musicPlayer.ForcePause();
         DanceRecorder.Instance.SortClipOrder();
     }
