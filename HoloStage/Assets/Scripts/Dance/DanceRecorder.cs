@@ -16,6 +16,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     [Header("UI")]
     public RecorderButton[] m_recordButton;
+    public RecordCountdown m_recordCountdown;
+    private bool b_recordButtonState;
     private bool b_isRecording;
     private bool b_pointerIsRecording;
     private bool b_isBeingDragged;
@@ -41,12 +43,14 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     void Start()
     {
         b_isRecording = false;
+        b_recordButtonState = false;
         b_isBeingDragged = false;
         m_pointerTrackClips = new List<TimelineClip>();
         m_animationTrackClips = new List<TimelineClip>();
         b_unsorted = false;
         m_trackIndex[0] = 0;
         m_trackIndex[1] = 0;
+        m_recordCountdown.SetCallback( StartRecording );
     }
     protected override void Awake()
     {
@@ -174,10 +178,35 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     public void OnRecordButtonPressed()
     {
-        b_isRecording = !b_isRecording;
+        b_recordButtonState = !b_recordButtonState;
+        if( b_recordButtonState )
+        {
+            m_recordCountdown.StartCountdown();
+        }
+        else
+        {
+            m_recordCountdown.CancelCountdown();
+            SetRecordingState ( false );
+        }
+        // b_isRecording = !b_isRecording;
+        // for( int i = 0 ; i < m_recordButton.Length ; i++ )
+        // {
+        //     m_recordButton[i].SetIconToRecording( b_isRecording );
+        // }
+    }
+
+    private void StartRecording()
+    {
+        SetRecordingState ( true );
+        m_timeIndicator.OnPressPlayButton();
+    }
+
+    private void SetRecordingState( bool p_state )
+    {
+        b_isRecording = p_state;
         for( int i = 0 ; i < m_recordButton.Length ; i++ )
         {
-            m_recordButton[i].SetIconToRecording( b_isRecording );
+            m_recordButton[i].SetIconToRecording( p_state );
         }
     }
 
