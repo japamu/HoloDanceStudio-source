@@ -113,19 +113,19 @@ public class CharacterSetterAR : MonoBehaviour
                 //Instantiate a fader plane here and start game instance
             }
         }
-        // else
-        // {
-        //     for(int i = 0; i < obj.added.Count; i++ )
-        //     {
-        //         obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-        //         // obj.added[i].gameObject.SetActive(false);
-        //     }
-        //     for(int i = 0; i < obj.updated.Count; i++ )
-        //     {
-        //         obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-        //         // obj.updated[i].gameObject.SetActive(false);
-        //     }
-        // }
+        else
+        {
+            for(int i = 0; i < obj.added.Count; i++ )
+            {
+                obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+                // obj.added[i].gameObject.SetActive(false);
+            }
+            for(int i = 0; i < obj.updated.Count; i++ )
+            {
+                obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+                // obj.updated[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     private float CalculatePlaneArea(ARPlane p_plane) {
