@@ -80,6 +80,7 @@ public class CharacterSetterAR : MonoBehaviour
                     m_charARManipulator.InitializeValues();
                     m_revealUI.SetActive(false);
                     RaycastPointer.SetActive(false);
+                    HidePlanes();
 
                 }
                 // RaycastPointer.transform.LookAt( Vector3.up );
@@ -95,9 +96,9 @@ public class CharacterSetterAR : MonoBehaviour
         }
 
     }
-    void PlanesChanged(ARPlanesChangedEventArgs obj) 
+    void PlanesChanged(ARPlanesChangedEventArgs p_obj) 
     {
-        ARPlane plane = obj.updated[0];
+        ARPlane plane = p_obj.updated[0];
         if( !bIsReadyForInvasion ) 
         {
             float area = CalculatePlaneArea(plane);
@@ -113,18 +114,26 @@ public class CharacterSetterAR : MonoBehaviour
                 //Instantiate a fader plane here and start game instance
             }
         }
-        else
+        m_obj = p_obj;
+        if( bHasInitiatedInvasion )
         {
-            for(int i = 0; i < obj.added.Count; i++ )
-            {
-                obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-                // obj.added[i].gameObject.SetActive(false);
-            }
-            for(int i = 0; i < obj.updated.Count; i++ )
-            {
-                obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
-                // obj.updated[i].gameObject.SetActive(false);
-            }
+            HidePlanes();
+        }
+        
+    }
+    private ARPlanesChangedEventArgs m_obj;
+
+    void HidePlanes()
+    {
+        for(int i = 0; i < m_obj.added.Count; i++ )
+        {
+            m_obj.added[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+            // obj.added[i].gameObject.SetActive(false);
+        }
+        for(int i = 0; i < m_obj.updated.Count; i++ )
+        {
+            m_obj.updated[i].GetComponent<Renderer>().material.SetColor("_TexTintColor", transparent);
+            // obj.updated[i].gameObject.SetActive(false);
         }
     }
 
