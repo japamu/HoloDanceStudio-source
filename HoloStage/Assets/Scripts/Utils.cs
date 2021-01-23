@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -30,5 +30,24 @@ public class Utils
         #else
             return false;
         #endif
+    }
+
+    public static string FloatTimeToFormattedString( float p_seconds, bool p_includeDecimal = false )
+    {
+        TimeSpan ts = TimeSpan.FromSeconds( p_seconds );
+        return TimeSpanToFormattedString( ts, p_includeDecimal);
+    }
+
+    public static string TimeSpanToFormattedString( TimeSpan p_timespan, bool p_includeDecimal = false )
+    {
+        if( p_includeDecimal )
+        {
+            return p_timespan.ToString(@"mm\:ss\.f");
+
+        }
+        else
+        {
+            return p_timespan.ToString(@"mm\:ss");
+        }
     }
 }

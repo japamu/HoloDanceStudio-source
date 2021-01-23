@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public class ConstrainedFollow : MonoBehaviour
@@ -18,6 +19,10 @@ public class ConstrainedFollow : MonoBehaviour
     private Joystick m_joystick;
     public bool m_debugMobile;
 
+    public Vector3 PointerPosition{ get{return m_target.position;} }
+
+    private bool m_bIsFollowingTrack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +31,7 @@ public class ConstrainedFollow : MonoBehaviour
         if( m_debugMobile )
             m_bIsMobile = true;
         #endif
+        m_bIsFollowingTrack = false;
     }
 
     public void SetJoystick( Joystick p_joystick )
@@ -45,18 +51,26 @@ public class ConstrainedFollow : MonoBehaviour
         {
             return;
         }
+        if( !DanceRecorder.Instance.IsRecording && DanceRecorder.Instance.IsTimeFlowing && !DanceRecorder.Instance.AfterLastRecorded )
+        {
+            return;
+        }
         if( m_bIsMobile )
         {
             //Control Scheme for Mobile
             if( m_joystick != null )
             {
-                Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
+                // Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
                 Vector2 joystickPos = new Vector2( m_joystick.Horizontal, m_joystick.Vertical );
                 m_target.position = GetPositionInBounds(joystickPos);
             }
         }
         else
         {
+            if( !Input.GetMouseButton(1) && DanceRecorder.Instance.IsRecording )
+            {
+                return;
+            }
             //Control Scheme for Desktop Exe
             m_mousePosition = Input.mousePosition;
             m_mousePosition = Camera.main.ScreenToWorldPoint(m_mousePosition);
@@ -97,6 +111,15 @@ public class ConstrainedFollow : MonoBehaviour
                 m_lastPos = m_target.position;
             }
         }
+    }
+
+    public void FollowPosition ( Vector3 p_pointerData )
+    {
+        // m_bIsFollowingTrack = true;
+        DOTween.Kill( m_target );
+        m_target.DOMove( p_pointerData, TimelineClip.DEFAULT_DURATION ).SetEase(Ease.Linear);
+        // m_target.DOMove( p_pointerData, TimelineClip.DEFAULT_DURATION ).SetEase(Ease.Linear).OnComplete( ()=>{ m_bIsFollowingTrack = false;}  );
+        // m_bIsFollowingTrack = false;
     }
 
     Vector2 GetPositionInBounds( Vector2 p_position )

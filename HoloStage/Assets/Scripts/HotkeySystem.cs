@@ -42,10 +42,19 @@ public class HotkeySystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+    void Update()
+    {
+        if( m_hotkeyWindow.activeInHierarchy )
+        {
+            foreach( KeyValuePair<KeyCode,HotkeyButton> item in HotkeyButtons )
+            {
+                if( Input.GetKeyDown( item.Key ) )
+                {
+                    OpenSelectAnimationWindow( item.Value , true );
+                }
+            }
+        }        
+    }
 
     public void SetupMobilecontrolPanel()
     {
@@ -97,6 +106,13 @@ public class HotkeySystem : MonoBehaviour
     {
         m_selAnimationWindow.gameObject.SetActive(true);
         m_selAnimationWindow.SetSelectedHotKey( m_button );
+    }
+    public void OpenSelectAnimationWindow( HotkeyButton m_button, bool p_cannotOpen)
+    {
+        if( p_cannotOpen == true && m_selAnimationWindow.gameObject.activeInHierarchy == true )
+        {
+            OpenSelectAnimationWindow(m_button);
+        }
     }
 
     public void ToggleHotkeyWindow( bool p_state )
