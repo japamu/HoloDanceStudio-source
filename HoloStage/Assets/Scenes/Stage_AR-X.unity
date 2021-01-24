@@ -729,6 +729,7 @@ MonoBehaviour:
   - 1.5
   initialScaleIndex: 2
   deltaMinimum: 0.025
+  debugDeltaMinLabel: {fileID: 0}
 --- !u!1 &609071525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,9 +2805,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1403388901}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
+      propertyPath: m_hideCanvasGroup.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1586646483649788470}
     - target: {fileID: 7526460662960133114, guid: a7d085744f6a55f46a0a709ad7b5cfef, type: 3}
       propertyPath: m_hideCanvasGroup.Array.data[1]
       value: 
