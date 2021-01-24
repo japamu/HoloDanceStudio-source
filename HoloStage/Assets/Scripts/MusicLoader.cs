@@ -34,7 +34,7 @@ public class MusicLoader : MonoBehaviour
 		// Name: Users
 		// Path: C:\Users
 		// Icon: default (folder icon)
-		FileBrowser.AddQuickLink( "Users", "C:\\Users", null );
+		
 
 		// Show a save file dialog 
 		// onSuccess event: not registered (which means this dialog is pretty useless)
@@ -48,6 +48,7 @@ public class MusicLoader : MonoBehaviour
 
     public void OnMusicButtonPress()
     {
+		FileBrowser.AddQuickLink( "Users", "C:\\Users", null );
         #if UNITY_ANDROID
 		    FileBrowser.SetFilters( false, new FileBrowser.Filter( "Audio", ".mp3", ".ogg") );
 		    FileBrowser.SetDefaultFilter( ".mp3" );

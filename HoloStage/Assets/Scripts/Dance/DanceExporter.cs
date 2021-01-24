@@ -21,6 +21,7 @@ public class DanceExporter : MonoBehaviour
     {
         Debug.Log("Save Button Pressed");
         FileBrowser.SetDefaultFilter(".hds");
+        // FileBrowser.AddQuickLink( "Users", "C:\\Users", null );
         StartCoroutine( ShowSaveDanceDataCoroutine() );
         // string json = JsonUtility.ToJson( m_danceData , true);
     }
@@ -28,6 +29,7 @@ public class DanceExporter : MonoBehaviour
     {
         Debug.Log("Load Button Pressed");
         FileBrowser.SetDefaultFilter(".hds");
+        // FileBrowser.AddQuickLink( "Users", "C:\\Users", null );
         StartCoroutine( ShowLoadDanceDataCoroutine() );
         // string json = JsonUtility.ToJson( m_danceData , true);
     }
