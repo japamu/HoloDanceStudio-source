@@ -57,6 +57,12 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         base.Awake();
     }
 
+    public void UpdateDanceData()
+    {
+        DanceData ddata = ExportDanceData();
+        DanceExporter._DANCEDATA = ddata;
+    }
+
     private void Update()
     {
         if( IsRecording && IsTimeFlowing)
