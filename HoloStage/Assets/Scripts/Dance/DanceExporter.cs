@@ -6,10 +6,16 @@ using SimpleFileBrowser;
 public class DanceExporter : MonoBehaviour
 {
     [SerializeField] DanceRecorder m_danceRecorder;
+    public static DanceData _DANCEDATA;
 
     // Start is called before the first frame update
     void Start()
     {
+        if( _DANCEDATA != null )
+        {
+            m_danceRecorder.ClearTrack();
+            m_danceRecorder.ImportDanceData( _DANCEDATA );
+        }
     }
 
     // Update is called once per frame
@@ -66,7 +72,8 @@ public class DanceExporter : MonoBehaviour
 
     private void SaveDataOn( string p_path )
     {
-        string json = JsonUtility.ToJson( m_danceRecorder.ExportDanceData() , true);
+        _DANCEDATA = m_danceRecorder.ExportDanceData();
+        string json = JsonUtility.ToJson( _DANCEDATA , true);
         #if UNITY_ANDROID
         p_path = "file://"+p_path;
         #endif
@@ -108,6 +115,7 @@ public class DanceExporter : MonoBehaviour
         DanceData dData = JsonUtility.FromJson<DanceData>( FileBrowserHelpers.ReadTextFromFile( p_path ) );
         m_danceRecorder.ClearTrack();
         m_danceRecorder.ImportDanceData( dData );
+        _DANCEDATA = dData;
         // string json = JsonUtility.ToJson( m_danceRecorder.ExportDanceData() , true);
         // #if UNITY_ANDROID
         // p_path = "file://"+p_path;
