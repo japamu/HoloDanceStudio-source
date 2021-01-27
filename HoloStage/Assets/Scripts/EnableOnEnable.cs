@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnableOnEnable : MonoBehaviour
 {
-    public GameObject m_enable;
+    public GameObject[] m_enable;
     // Start is called before the first frame update
     void OnEnable() 
     {
-        m_enable.SetActive(true);
+        for( int i = 0 ; i < m_enable.Length; i++ )
+        {
+            m_enable[i].SetActive(true);
+        }
     }
 
     // Update is called once per frame

@@ -51,4 +51,13 @@ public class ARToggle : MonoBehaviour
             SceneManager.LoadScene(NONAR_SCENE_NAME,LoadSceneMode.Single);
         }
     }
+
+    public void OnResetPress()
+    {
+        if( !isOnARScene )
+        {
+            //Go to AR Scene
+            SceneManager.LoadScene(AR_SCENE_NAME,LoadSceneMode.Single);
+        }
+    }
 }
