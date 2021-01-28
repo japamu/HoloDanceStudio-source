@@ -12,7 +12,7 @@ public class ARAvailability : MonoBehaviour
     {
         StartCoroutine(ARSession.CheckAvailability());
         StartCoroutine(AllowARScene());
-        m_button.interactable = false;
+        // m_button.interactable = false;
     }
  
     IEnumerator AllowARScene()
@@ -23,12 +23,14 @@ public class ARAvailability : MonoBehaviour
                 ARSession.state == ARSessionState.None)
             {
                 Debug.Log("Waiting...");
+                m_button.interactable = false;
                 yield return null;
             }
             if (ARSession.state == ARSessionState.Unsupported)
             {
                 Debug.Log("AR unsupported");
                 gameObject.SetActive( false );
+                m_button.interactable = false;
                 yield break;
             }
             if (ARSession.state > ARSessionState.CheckingAvailability)
