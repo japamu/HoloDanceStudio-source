@@ -14,10 +14,10 @@ public class MobileRestrictions : MonoBehaviour
     {
         if( Utils.IsMobile() )
         {
-            for( int i  = 0 ; i < m_restricted.Length ; i++ )
-            {
-                m_restricted[i].interactable = false;
-            }
+            // for( int i  = 0 ; i < m_restricted.Length ; i++ )
+            // {
+            //     m_restricted[i].interactable = false;
+            // }
             for( int i  = 0 ; i < m_disabled.Length ; i++ )
             {
                 m_disabled[i].SetActive( false );

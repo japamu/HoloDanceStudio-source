@@ -20,10 +20,10 @@ public class CameraAdjust : MonoBehaviour
     // Update is called once per frame
     public void CheckWindows()
     {
-        if( Utils.IsMobile() )
-        {
-            return;
-        }
+        // if( Utils.IsMobile() )
+        // {
+        //     return;
+        // }
         int check = 0;
         for( int i = 0 ; i < m_windowsToObserve.Length; i++ )
         {

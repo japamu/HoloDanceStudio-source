@@ -68,6 +68,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         if( IsRecording && IsTimeFlowing)
         {
             PointerRecord();
+            MobilePointerRecord();
         }
         if( m_timeIndicator.IsTimeFlowing )
         {
@@ -156,6 +157,10 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
 
     private void PointerRecord()
     {
+        if( Utils.IsMobile() )
+        {
+            return;
+        }
         if( Input.GetMouseButtonDown(1) )
         {
             RecordAnimation( m_follow.PointerPosition );
@@ -175,6 +180,37 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
+            m_latestPointerClip.FinishPointerData();
+            m_pointerDuration = 0;
+            b_pointerIsRecording = false;
+        }
+        
+    }
+    private void MobilePointerRecord()
+    {
+        if( !Utils.IsMobile() )
+        {
+            return;
+        }
+        if( m_follow.Joystick.HasInput && !b_pointerIsRecording )
+        {
+            RecordAnimation( m_follow.PointerPosition  );
+            m_pointerDuration = 0;
+            b_pointerIsRecording = true;
+        }
+        else if ( m_follow.Joystick.HasInput )
+        {
+            // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
+            m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
+            m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
+            m_pointerDuration += Time.deltaTime;
+            b_pointerIsRecording = true;
+        }
+        else if ( !m_follow.Joystick.HasInput && b_pointerIsRecording )
+        {
+            // m_latestPointerClip.SetWidth( TimelineController.ConvertDurationToWidth( m_pointerDuration, m_timeIndicator.ZoomLevel ) );
+            m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
+            // m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
             m_latestPointerClip.FinishPointerData();
             m_pointerDuration = 0;
             b_pointerIsRecording = false;

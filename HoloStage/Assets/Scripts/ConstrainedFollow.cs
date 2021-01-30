@@ -20,6 +20,7 @@ public class ConstrainedFollow : MonoBehaviour
     public bool m_debugMobile;
 
     public Vector3 PointerPosition{ get{return m_target.position;} }
+    public Joystick Joystick{ get{return m_joystick;} }
 
     private bool m_bIsFollowingTrack;
 
@@ -58,7 +59,7 @@ public class ConstrainedFollow : MonoBehaviour
         if( m_bIsMobile )
         {
             //Control Scheme for Mobile
-            if( m_joystick != null )
+            if( m_joystick != null && m_joystick.HasInput )
             {
                 // Debug.LogError($"Horizontal: {m_joystick.Horizontal} | Vertical: {m_joystick.Vertical}" );
                 Vector2 joystickPos = new Vector2( m_joystick.Horizontal, m_joystick.Vertical );
