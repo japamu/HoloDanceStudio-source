@@ -12,10 +12,13 @@ public class TimelineClip : MonoBehaviour
 {
     private static float DEFAULT_WIDTH = 50;
     public static float DEFAULT_DURATION = 0.05f;
+    public static float HOLD_DURATION_DEL = 0.5f;
     [SerializeField] private RectTransform m_rectTransform;
     private float m_timestamp;
     public float TimeStamp{ get{return m_timestamp;} }
     private float m_duration;
+    private float m_deleteCounter;
+    private bool m_bIsPressingDown;
     public float Duration{ get{return m_duration;} }
     public float TimeStampFinish{ get{return m_timestamp+m_duration;} }
     public Image m_icon;
@@ -45,6 +48,7 @@ public class TimelineClip : MonoBehaviour
     private void Start() 
     {
         m_rectTransform = GetComponent<RectTransform>();
+        m_bIsPressingDown = false;
     }
 
     public void SetCallback( Action<AnimationData> p_callback )
@@ -217,9 +221,17 @@ public class TimelineClip : MonoBehaviour
     private void Update()
     {
         // if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
-        if( Input.GetMouseButtonDown(1) && m_pointerIsOver )
+        if(  !Utils.IsMobile() && Input.GetMouseButtonDown(1) && m_pointerIsOver )
         {
             RemoveFromTrack();
+        }
+        if(  Utils.IsMobile() && m_bIsPressingDown && m_pointerIsOver )
+        {
+            m_deleteCounter += Time.deltaTime;
+            if( m_deleteCounter > HOLD_DURATION_DEL )
+            {
+                RemoveFromTrack();
+            }
         }
     }
 
@@ -241,16 +253,30 @@ public class TimelineClip : MonoBehaviour
         }
         else
         {
-            GivePoint( debugTime );
-            Vector3 d = GetPoint();
-            Debug.Log( $"Point: {d}" );
-            debugTime += 0.05f;
+            // GivePoint( debugTime );
+            // Vector3 d = GetPoint();
+            // Debug.Log( $"Point: {d}" );
+            // debugTime += 0.05f;
 
             // for( int i = 0 ; i < m_pointerPositions.Count ; i++ )
             // {
             //     Debug.Log($"Point: {m_pointerPositions[i]}");
             // }
         }
+        if( Utils.IsMobile() )
+        {
+            m_deleteCounter = 0;
+        }
+    }
+
+    public void OnPressMobile( bool p_isDown ) {
+        if( !Utils.IsMobile() )
+        {
+            return;
+        }
+        m_bIsPressingDown = p_isDown;
+        m_deleteCounter = 0;
+
     }
 
 
