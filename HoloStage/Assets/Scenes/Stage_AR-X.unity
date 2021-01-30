@@ -1063,6 +1063,7 @@ MonoBehaviour:
   m_detectUI: {fileID: 1041823346}
   m_raycastManager: {fileID: 418157854}
   m_ARObjects: {fileID: 708231804}
+  m_pinchInstruction: {fileID: 3449804806378918496, guid: 2649122bc897ab44fb1513bff2e8a995, type: 3}
   m_character: {fileID: 582623933}
   m_charARManipulator: {fileID: 589984030}
   m_revealUI: {fileID: 1735150413}

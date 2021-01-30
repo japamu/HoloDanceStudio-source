@@ -7,6 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 public class CharacterSetterAR : MonoBehaviour
 {
     const string k_FadeOffAnim = "FadeOff";
+    const string KEY_PINCH = "hds_pinch";
 
     //This is in meters irl
     [Header("AR Setup References")]
@@ -15,6 +16,7 @@ public class CharacterSetterAR : MonoBehaviour
     [Header("Initialize Stage")]
     public ARRaycastManager m_raycastManager;
     public GameObject m_ARObjects;
+    public GameObject m_pinchInstruction;
     public GameObject m_character;
     public CharacterARManipulator m_charARManipulator;
     [Header("Initialize Detecting")]
@@ -81,6 +83,7 @@ public class CharacterSetterAR : MonoBehaviour
                     m_revealUI.SetActive(false);
                     RaycastPointer.SetActive(false);
                     HidePlanes();
+                    ShowPinchInstructions();
 
                 }
                 // RaycastPointer.transform.LookAt( Vector3.up );
@@ -139,5 +142,16 @@ public class CharacterSetterAR : MonoBehaviour
 
     private float CalculatePlaneArea(ARPlane p_plane) {
         return p_plane.size.x * p_plane.size.y;
+    }
+
+    private void ShowPinchInstructions()
+    {
+        int pinchShow = PlayerPrefs.GetInt(KEY_PINCH);
+        if( pinchShow < 2 )
+        {
+            Instantiate(m_pinchInstruction);
+            pinchShow++;
+            PlayerPrefs.SetInt(KEY_PINCH, pinchShow);
+        }
     }
 }
