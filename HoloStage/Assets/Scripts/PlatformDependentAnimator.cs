@@ -7,8 +7,8 @@ public class PlatformDependentAnimator : MonoBehaviour
     public Animator m_animator;
     public string animstate_pc;
     public string animstate_android;
-    // Start is called before the first frame update
-    void Start()
+
+    void OnEnable()
     {
         if( Utils.IsMobile() )
         {
@@ -20,9 +20,4 @@ public class PlatformDependentAnimator : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
