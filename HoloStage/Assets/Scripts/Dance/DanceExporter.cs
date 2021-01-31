@@ -106,6 +106,9 @@ public class DanceExporter : MonoBehaviour
 		// Print whether the user has selected some files/folders or cancelled the operation (FileBrowser.Success)
 		Debug.Log( FileBrowser.Success );
         yield return new WaitForSeconds(0.1f);
+        NotificationScreen.Instance.ShowWindow("Loading Holo Dance Studio File");
+        yield return new WaitForEndOfFrame();
+
 		if( FileBrowser.Success )
 		{
 			// Print paths of the selected files (FileBrowser.Result) (null, if FileBrowser.Success is false)
