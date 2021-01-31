@@ -107,7 +107,7 @@ public class DanceExporter : MonoBehaviour
 		Debug.Log( FileBrowser.Success );
         yield return new WaitForSeconds(0.1f);
         NotificationScreen.Instance.ShowWindow("Loading Holo Dance Studio File");
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
 
 		if( FileBrowser.Success )
 		{
