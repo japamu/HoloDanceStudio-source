@@ -263,10 +263,10 @@ public class TimelineClip : MonoBehaviour
             //     Debug.Log($"Point: {m_pointerPositions[i]}");
             // }
         }
-        if( Utils.IsMobile() )
-        {
-            m_deleteCounter = 0;
-        }
+        // if( Utils.IsMobile() )
+        // {
+        //     m_deleteCounter = 0;
+        // }
     }
 
     public void OnPressMobile( bool p_isDown ) {
