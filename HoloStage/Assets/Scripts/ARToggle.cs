@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 
 public class ARToggle : MonoBehaviour
 {
     public Text m_confirmationScreenMessage;
     public Text m_confirmationButton;
+    public ARSession m_session;
     private bool isOnARScene;
     private static string AR_SCENE_NAME = "Stage_AR-X";
     private static string NONAR_SCENE_NAME = "Stage_0";
@@ -56,6 +58,7 @@ public class ARToggle : MonoBehaviour
     {
         if( !isOnARScene )
         {
+            m_session.Reset();
             //Go to AR Scene
             SceneManager.LoadScene(AR_SCENE_NAME,LoadSceneMode.Single);
         }
