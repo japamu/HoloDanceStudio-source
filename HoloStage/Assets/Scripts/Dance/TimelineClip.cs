@@ -225,7 +225,7 @@ public class TimelineClip : MonoBehaviour
         {
             RemoveFromTrack();
         }
-        if(  Utils.IsMobile() && m_bIsPressingDown && m_pointerIsOver )
+        if(  Utils.IsMobile() && m_bIsPressingDown )
         {
             m_deleteCounter += Time.deltaTime;
             if( m_deleteCounter > HOLD_DURATION_DEL )
