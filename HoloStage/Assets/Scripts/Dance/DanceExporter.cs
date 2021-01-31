@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿#if UNITY_ANDROID && !UNITY_EDITOR
+using System.IO;
+#endif
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleFileBrowser;
@@ -16,6 +19,7 @@ public class DanceExporter : MonoBehaviour
             m_danceRecorder.ClearTrack();
             m_danceRecorder.ImportDanceData( _DANCEDATA );
         }
+		FileBrowser.AddQuickLink( "Save Folder", Application.persistentDataPath, null );
     }
 
     // Update is called once per frame
@@ -74,8 +78,10 @@ public class DanceExporter : MonoBehaviour
     {
         _DANCEDATA = m_danceRecorder.ExportDanceData();
         string json = JsonUtility.ToJson( _DANCEDATA , true);
-        #if UNITY_ANDROID
-        p_path = "file://"+p_path;
+        
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        p_path = Path.Combine(Application.persistentDataPath, FileBrowserHelpers.GetFilename(p_path) );
+        // Debug.Log("Saving to: " + p_path);
         #endif
         FileBrowserHelpers.WriteTextToFile( p_path , json );
 
@@ -94,7 +100,7 @@ public class DanceExporter : MonoBehaviour
 		// Dialog is closed
 		// Print whether the user has selected some files/folders or cancelled the operation (FileBrowser.Success)
 		Debug.Log( FileBrowser.Success );
-
+        yield return new WaitForSeconds(0.1f);
 		if( FileBrowser.Success )
 		{
 			// Print paths of the selected files (FileBrowser.Result) (null, if FileBrowser.Success is false)
@@ -112,6 +118,9 @@ public class DanceExporter : MonoBehaviour
 	}
     private void LoadDataOn( string p_path )
     {
+        // #if UNITY_ANDROID
+        // p_path = "file://"+p_path;
+        // #endif
         DanceData dData = JsonUtility.FromJson<DanceData>( FileBrowserHelpers.ReadTextFromFile( p_path ) );
         m_danceRecorder.ClearTrack();
         m_danceRecorder.ImportDanceData( dData );
