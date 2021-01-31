@@ -78,8 +78,12 @@ public class DanceExporter : MonoBehaviour
     {
         _DANCEDATA = m_danceRecorder.ExportDanceData();
         string json = JsonUtility.ToJson( _DANCEDATA , true);
-        
+
         #if UNITY_ANDROID && !UNITY_EDITOR
+        if( !json.Contains( Application.persistentDataPath) )
+        {
+            NotificationScreen.Instance.ShowWindow( $"Due to Android OS limitations,\nyour file can only be saved in\n\"{Application.persistentDataPath}\"" );
+        }
         p_path = Path.Combine(Application.persistentDataPath, FileBrowserHelpers.GetFilename(p_path) );
         // Debug.Log("Saving to: " + p_path);
         #endif
