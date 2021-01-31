@@ -602,6 +602,52 @@ MonoBehaviour:
   m_AttemptUpdate: 1
   m_MatchFrameRate: 0
   m_TrackingMode: 0
+--- !u!1 &1666865418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666865420}
+  - component: {fileID: 1666865419}
+  m_Layer: 0
+  m_Name: OpenHelpWindows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1666865419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666865418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c14501c6972db43b6356edba79675f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HelpScreens:
+  - {fileID: 9179030151955545251}
+  - {fileID: 1403388901}
+--- !u!4 &1666865420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666865418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!225 &1692636805 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 1692636805, guid: afaf71f1ef1e4e54c915da30b2c12d84, type: 3}
@@ -1657,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5615040445740506231, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5741018961810804232, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1891,6 +1937,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OpenHelpWindows, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1666865419}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnCloseHelpWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936503300814439974, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8098284310508356403, guid: 6912aaf1a69dd2d428d1a06cb17afdd5, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2080,6 +2154,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 481789278652882879, guid: 378ef1190e76e834f812d790cffa005a, type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196216491506487860, guid: 378ef1190e76e834f812d790cffa005a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -2410,7 +2410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519269145524694519, guid: 5b6aa6706b8275148bdd01efd31bae60, type: 3}
       propertyPath: m_Name
-      value: HelpScreen
+      value: HelpScreen_Recording
       objectReference: {fileID: 0}
     - target: {fileID: 519269145524694519, guid: 5b6aa6706b8275148bdd01efd31bae60, type: 3}
       propertyPath: m_IsActive

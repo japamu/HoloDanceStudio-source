@@ -146,7 +146,7 @@ public class CharacterSetterAR : MonoBehaviour
     private void ShowPinchInstructions()
     {
         int pinchShow = PlayerPrefs.GetInt(Utils.KEY_PINCH);
-        if( pinchShow < 2 )
+        if( pinchShow < Utils.REPEAT_PINCH )
         {
             GameObject _pinchInst = Instantiate(m_pinchInstruction);
             m_charARManipulator.SetPinchInstruction(_pinchInst);
