@@ -7,7 +7,6 @@ using UnityEngine.XR.ARSubsystems;
 public class CharacterSetterAR : MonoBehaviour
 {
     const string k_FadeOffAnim = "FadeOff";
-    const string KEY_PINCH = "hds_pinch";
 
     //This is in meters irl
     [Header("AR Setup References")]
@@ -146,12 +145,13 @@ public class CharacterSetterAR : MonoBehaviour
 
     private void ShowPinchInstructions()
     {
-        int pinchShow = PlayerPrefs.GetInt(KEY_PINCH);
+        int pinchShow = PlayerPrefs.GetInt(Utils.KEY_PINCH);
         if( pinchShow < 2 )
         {
-            Instantiate(m_pinchInstruction);
-            pinchShow++;
-            PlayerPrefs.SetInt(KEY_PINCH, pinchShow);
+            GameObject _pinchInst = Instantiate(m_pinchInstruction);
+            m_charARManipulator.SetPinchInstruction(_pinchInst);
+            // pinchShow++;
+            // PlayerPrefs.SetInt(Utils.KEY_PINCH, pinchShow);
         }
     }
 }

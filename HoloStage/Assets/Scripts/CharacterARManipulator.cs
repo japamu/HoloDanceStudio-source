@@ -29,6 +29,8 @@ public class CharacterARManipulator : MonoBehaviour
 	private Vector2 curDist = new Vector2(0,0);
 	private Vector2 initDist = new Vector2(0,0);
 
+    private GameObject m_pinchInstruction;
+
     public void InitializeValues()
     {
         scaleIndex = initialScaleIndex;
@@ -110,6 +112,7 @@ public class CharacterARManipulator : MonoBehaviour
                     scaleIndex++;
                     m_character.localScale = Vector3.one * m_presetScale[scaleIndex];
                     initDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //This resets the point of reference for pinching
+                    PinchInstructionCheck();
                 }
 				// if(m_character.localScale.x < MAXSCALE && m_character.localScale.y < MAXSCALE)
 				// {
@@ -128,6 +131,7 @@ public class CharacterARManipulator : MonoBehaviour
                     scaleIndex--;
                     m_character.localScale = Vector3.one * m_presetScale[scaleIndex];
                     initDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //This resets the point of reference for pinching
+                    PinchInstructionCheck();
                 }
 				// if(m_character.localScale.x > MIN_SCALE && m_character.localScale.y > MIN_SCALE)
 				// {
@@ -152,5 +156,23 @@ public class CharacterARManipulator : MonoBehaviour
             deltaMinimum += p_val;
         }
         DisplayDeltaMinimum();
+    }
+    
+    public void SetPinchInstruction ( GameObject p_object )
+    {
+        m_pinchInstruction = p_object;
+    }
+
+    private void PinchInstructionCheck()
+    {
+        if( m_pinchInstruction != null )
+        {
+            int pinchShow = PlayerPrefs.GetInt(Utils.KEY_PINCH);
+            pinchShow++;
+            PlayerPrefs.SetInt(Utils.KEY_PINCH, pinchShow);
+            
+            m_pinchInstruction.SetActive(false);
+            m_pinchInstruction = null;
+        }
     }
 }

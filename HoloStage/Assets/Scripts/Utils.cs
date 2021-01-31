@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class Utils
 {
+    public const string KEY_PINCH = "hds_pinch";
     // Start is called before the first frame update
     public static bool MouseScreenCheck(){
         #if UNITY_EDITOR
