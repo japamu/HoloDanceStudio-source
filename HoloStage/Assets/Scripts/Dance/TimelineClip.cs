@@ -225,11 +225,11 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         // }
         // return Vector3.zero;
     }
-
+    #if !UNITY_ANDROID
     private void Update()
     {
         // if( Input.GetKeyDown(KeyCode.Delete) && m_pointerIsOver )
-        if(  !Utils.IsMobile() && Input.GetMouseButtonDown(1) && m_pointerIsOver )
+        if( Input.GetMouseButtonDown(1) && m_pointerIsOver )
         {
             RemoveFromTrack();
         }
@@ -242,6 +242,7 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         //     }
         // }
     }
+    #endif
 
     public void RemoveFromTrack()
     {
