@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum TimelineClipType{
@@ -8,7 +9,7 @@ public enum TimelineClipType{
     Animation
 }
 
-public class TimelineClip : MonoBehaviour
+public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private static float DEFAULT_WIDTH = 50;
     public static float DEFAULT_DURATION = 0.05f;
@@ -22,6 +23,7 @@ public class TimelineClip : MonoBehaviour
     public float Duration{ get{return m_duration;} }
     public float TimeStampFinish{ get{return m_timestamp+m_duration;} }
     public Image m_icon;
+    public Toggle m_toggle;
 
     private float m_localTimer;
     private int m_localIndex;
@@ -41,6 +43,7 @@ public class TimelineClip : MonoBehaviour
 
     public void PointerOver( bool p_pointerIsOver )
     {
+        if( !Utils.IsMobile() )
         m_pointerIsOver = p_pointerIsOver;
     }
     
@@ -49,6 +52,11 @@ public class TimelineClip : MonoBehaviour
     {
         m_rectTransform = GetComponent<RectTransform>();
         m_bIsPressingDown = false;
+    }
+
+    public void SetToggleGroup( ToggleGroup p_tg )
+    {
+        m_toggle.group = p_tg;
     }
 
     public void SetCallback( Action<AnimationData> p_callback )
@@ -225,14 +233,14 @@ public class TimelineClip : MonoBehaviour
         {
             RemoveFromTrack();
         }
-        if(  Utils.IsMobile() && m_bIsPressingDown )
-        {
-            m_deleteCounter += Time.deltaTime;
-            if( m_deleteCounter > HOLD_DURATION_DEL )
-            {
-                RemoveFromTrack();
-            }
-        }
+        // if(  Utils.IsMobile() && m_bIsPressingDown )
+        // {
+        //     m_deleteCounter += Time.deltaTime;
+        //     if( m_deleteCounter > HOLD_DURATION_DEL )
+        //     {
+        //         RemoveFromTrack();
+        //     }
+        // }
     }
 
     public void RemoveFromTrack()
@@ -244,6 +252,10 @@ public class TimelineClip : MonoBehaviour
     float debugTime = 0;
     public void onPress()
     {
+        if( Utils.IsMobile() )
+        {
+            return;
+        }
         if( m_callback!= null )
         {
             m_callback.Invoke( m_animData );
@@ -268,16 +280,35 @@ public class TimelineClip : MonoBehaviour
         //     m_deleteCounter = 0;
         // }
     }
-
-    public void OnPressMobile( bool p_isDown ) {
-        if( !Utils.IsMobile() )
-        {
-            return;
-        }
-        m_bIsPressingDown = p_isDown;
-        m_deleteCounter = 0;
-
+    public void OnPointerEnter (PointerEventData eventData) {
+        PointerOver(true);
     }
+    public void OnPointerExit (PointerEventData eventData) {
+        PointerOver(false);
+    }
+
+    // public void OnPointerDown (PointerEventData eventData) {
+    //      // Do action
+    //      OnPressMobile(true);
+    //  }
+ 
+    //  public void OnPointerUp (PointerEventData eventData) {
+    //      // Do action
+    //      OnPressMobile(false);
+    //  }
+
+    // public void OnPressMobile( bool p_isDown ) {
+    //     if( !Utils.IsMobile() )
+    //     {
+    //         return;
+    //     }
+    //     m_bIsPressingDown = p_isDown;
+    //     if( p_isDown )
+    //     {
+    //         m_deleteCounter = 0f;
+    //     }
+
+    // }
 
 
 }

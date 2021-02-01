@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DanceRecorder : MonoInstance<DanceRecorder>
 {
@@ -17,6 +18,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     [Header("UI")]
     public RecorderButton[] m_recordButton;
     public RecordCountdown m_recordCountdown;
+    public ToggleGroup m_toggleGroup;
     private bool b_recordButtonState;
     private bool b_isRecording;
     private bool b_pointerIsRecording;
@@ -267,6 +269,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     {
 
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 1 ] ).GetComponent<TimelineClip>();
+        temp.SetToggleGroup( m_toggleGroup );
         temp.SetTimestamp( p_time, p_pos );
         temp.ClipType = TimelineClipType.Animation;
         temp.SetAnimationData( p_data, m_animationLibrary.GetAnimationIndex(p_data) );
@@ -286,6 +289,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             return;
         }
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
+        temp.SetToggleGroup( m_toggleGroup );
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
         temp.ClipType = TimelineClipType.Pointer;
         temp.SetPointerData( p_data );
@@ -301,6 +305,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public void RecordAnimationFromData( List<Vector2> p_pointerDatas, float p_time, Vector2 p_pos  )
     {
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
+        temp.SetToggleGroup( m_toggleGroup );
         temp.SetTimestamp( p_time , p_pos );
         temp.ClipType = TimelineClipType.Pointer;
         temp.SetPointerListData( p_pointerDatas );
