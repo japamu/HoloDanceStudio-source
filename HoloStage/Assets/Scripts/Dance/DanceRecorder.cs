@@ -19,6 +19,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
     public RecorderButton[] m_recordButton;
     public RecordCountdown m_recordCountdown;
     public ToggleGroup m_toggleGroup;
+    public DeleteConfirmation m_deleteConfirmation;
     private bool b_recordButtonState;
     private bool b_isRecording;
     private bool b_pointerIsRecording;
@@ -432,6 +433,18 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             Debug.LogError($"SavedPointerData{temp.pointerPositions.Count}");
             // AnimationData tempAnim= m_animationLibrary.GetAnimationData( temp.animType, temp.animIndex );
             RecordAnimationFromData( temp.pointerPositions , temp.timestamp, m_timeIndicator.GetSetPositionOfTime(temp.timestamp));
+        }
+    }
+
+    public void DeleteButtonPress()
+    {
+        if( m_toggleGroup.ActiveToggles().Count() > 0 )
+        {
+            m_toggleGroup.GetFirstActiveToggle().GetComponent<TimelineClip>().RemoveFromTrack();
+        }
+        else
+        {
+            m_deleteConfirmation.ShowMessage("Clear track?", ClearTrack );
         }
     }
 }
