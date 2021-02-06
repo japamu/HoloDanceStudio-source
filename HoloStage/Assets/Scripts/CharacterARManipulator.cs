@@ -30,6 +30,7 @@ public class CharacterARManipulator : MonoBehaviour
 	private Vector2 initDist = new Vector2(0,0);
 
     private GameObject m_pinchInstruction;
+    private SpringBone[] m_charSpringBones;
 
     public void InitializeValues()
     {
@@ -42,10 +43,11 @@ public class CharacterARManipulator : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
+    void Start()
+    {
+        m_charSpringBones = m_character.GetComponentsInChildren<SpringBone>();
+        AdjustSpringBones();
+    }
 
     // Update is called once per frame
     void Update()
@@ -112,6 +114,7 @@ public class CharacterARManipulator : MonoBehaviour
                     scaleIndex++;
                     m_character.localScale = Vector3.one * m_presetScale[scaleIndex];
                     initDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //This resets the point of reference for pinching
+                    AdjustSpringBones();
                     PinchInstructionCheck();
                 }
 				// if(m_character.localScale.x < MAXSCALE && m_character.localScale.y < MAXSCALE)
@@ -131,6 +134,7 @@ public class CharacterARManipulator : MonoBehaviour
                     scaleIndex--;
                     m_character.localScale = Vector3.one * m_presetScale[scaleIndex];
                     initDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //This resets the point of reference for pinching
+                    AdjustSpringBones();
                     PinchInstructionCheck();
                 }
 				// if(m_character.localScale.x > MIN_SCALE && m_character.localScale.y > MIN_SCALE)
@@ -173,6 +177,14 @@ public class CharacterARManipulator : MonoBehaviour
             
             m_pinchInstruction.SetActive(false);
             m_pinchInstruction = null;
+        }
+    }
+
+    private void AdjustSpringBones()
+    {
+        for( int i = 0 ; i < m_charSpringBones.Length; i++ )
+        {
+            m_charSpringBones[i].AdjustSpringSpecs();
         }
     }
 }

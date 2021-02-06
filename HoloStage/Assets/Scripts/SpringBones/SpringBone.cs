@@ -30,10 +30,25 @@ public class SpringBone : MonoBehaviour
     private Vector3 currTipPos;
     private Vector3 prevTipPos;
 
+    private float adjustedRadius;
+    private float adjustedspringLength;
+    private float adjustedStiffnessForce;
+    private Vector3 adjustedSpringForce;
+
     private void Awake()
     {
         trs = transform;
         localRotation = transform.localRotation;
+        AdjustSpringSpecs();
+
+    }
+
+    public void AdjustSpringSpecs()
+    {
+        adjustedRadius = radius * transform.lossyScale.magnitude;
+        adjustedspringLength = springLength * transform.lossyScale.magnitude;
+        adjustedStiffnessForce = stiffnessForce * (transform.lossyScale.x)  ;
+        adjustedSpringForce = springForce * (transform.lossyScale.x)  ;
     }
 
     public SpringBone Child 
@@ -59,7 +74,7 @@ public class SpringBone : MonoBehaviour
     {
         if (Child)
         {
-            springLength = Vector3.Distance(trs.position, Child.transform.position);
+            adjustedspringLength = Vector3.Distance(trs.position, Child.transform.position);
             currTipPos = Child.transform.position;
             prevTipPos = Child.transform.position;
         }
@@ -73,12 +88,12 @@ public class SpringBone : MonoBehaviour
         float sqrDt = Time.deltaTime * Time.deltaTime;
 
         //stiffness
-        Vector3 force = trs.rotation * (Vector3.right * stiffnessForce) / sqrDt;
+        Vector3 force = trs.rotation * (Vector3.right * adjustedStiffnessForce) / sqrDt;
 
         //drag
         force += (prevTipPos - currTipPos) * dragForce / sqrDt;
 
-        force += springForce / sqrDt;
+        force += adjustedSpringForce / sqrDt;
 
         //前フレームと値が同じにならないように
         Vector3 temp = currTipPos;
@@ -87,16 +102,16 @@ public class SpringBone : MonoBehaviour
         currTipPos = (currTipPos - prevTipPos) + currTipPos + (force * sqrDt);
 
         //長さを元に戻す
-        currTipPos = ((currTipPos - trs.position).normalized * springLength) + trs.position;
+        currTipPos = ((currTipPos - trs.position).normalized * adjustedspringLength) + trs.position;
 
         //衝突判定
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (Vector3.Distance(currTipPos, colliders[i].transform.position) <= (radius + colliders[i].radius))
+            if (Vector3.Distance(currTipPos, colliders[i].transform.position) <= (adjustedRadius + colliders[i].radius))
             {
                 Vector3 normal = (currTipPos - colliders[i].transform.position).normalized;
-                currTipPos = colliders[i].transform.position + (normal * (radius + colliders[i].radius));
-                currTipPos = ((currTipPos - trs.position).normalized * springLength) + trs.position;
+                currTipPos = colliders[i].transform.position + (normal * (adjustedRadius + colliders[i].radius));
+                currTipPos = ((currTipPos - trs.position).normalized * adjustedspringLength) + trs.position;
             }
         }
 
@@ -113,7 +128,7 @@ public class SpringBone : MonoBehaviour
         if (debug)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(currTipPos, radius);
+            Gizmos.DrawWireSphere(currTipPos, adjustedRadius);
         }
     }
 
