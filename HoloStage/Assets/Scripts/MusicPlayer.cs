@@ -104,7 +104,7 @@ public class MusicPlayer : MonoBehaviour
                 m_playButtons[i].SetIcon(m_audioSource.isPlaying);
             }
         }
-        DanceRecorder.Instance.UpdateDanceData();
+        // DanceRecorder.Instance.UpdateDanceData();
     }
     public void OnPressStopButton()
     {
@@ -125,7 +125,7 @@ public class MusicPlayer : MonoBehaviour
             }
         }
         DanceRecorder.Instance.RepositionIndex( 0 );
-        DanceRecorder.Instance.UpdateDanceData();
+        // DanceRecorder.Instance.UpdateDanceData();
     }
 
     public void OnSliderChanged()
@@ -189,6 +189,6 @@ public class MusicPlayer : MonoBehaviour
                 m_audioSource.Pause();
             }
         }
-        DanceRecorder.Instance.UpdateDanceData();
+        // DanceRecorder.Instance.UpdateDanceData();
     }
 }
