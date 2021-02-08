@@ -289,6 +289,15 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         {
             return;
         }
+        //Cut Current Timeline Clip if it exists
+        if( m_pointerTrackClips.Count > m_trackIndex[1] && m_pointerTrackClips[ m_trackIndex[1]  ] != null )//&& m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        {
+            if( m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+            {
+                Debug.Log("Trimming Current Animation");
+                m_pointerTrackClips[ m_trackIndex[1]  ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
+            }
+        }
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
         temp.SetToggleGroup( m_toggleGroup );
         temp.SetTimestamp( m_timeIndicator.GetCurrentTime(), m_timeIndicator.GetCurrentSetPosition() );
@@ -301,6 +310,8 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             b_unsorted = true;
         }
         m_pointerTrackClips.Add(temp);
+        Debug.Log("Add new Clip");
+
     }
 
     public void RecordAnimationFromData( List<Vector2> p_pointerDatas, float p_time, Vector2 p_pos  )

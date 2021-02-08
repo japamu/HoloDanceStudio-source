@@ -137,6 +137,22 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         SetWidth( TimelineController.ConvertDurationToWidth( p_dur, p_zoomLevel ) );
     }
 
+    public void TrimClip( float p_endTime, float p_zoomLevel )
+    {
+        float dur = p_endTime - m_timestamp;
+        if( dur > DEFAULT_DURATION )
+        {
+            m_duration = dur;
+        }
+        else
+        {
+            m_duration = DEFAULT_DURATION;
+        }
+        SetWidth( TimelineController.ConvertDurationToWidth( m_duration, p_zoomLevel ) );
+        int indexToCut = FindLocalIndex( p_endTime );
+        m_pointerPositions.RemoveRange( indexToCut, m_pointerPositions.Count-indexToCut );
+    }
+
     public void SetWidth( float p_width )
     {
         if( p_width > DEFAULT_WIDTH)
@@ -174,11 +190,7 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 }
                 else
                 {
-                    //find the correct index
-                    while( p_time >= m_timestamp + ( (float)m_localIndex*DEFAULT_DURATION )  )
-                    {
-                        m_localIndex++;
-                    }
+                    m_localIndex = FindLocalIndex( p_time, m_localIndex);
                 }
             }
             //Clip is before current time
@@ -187,6 +199,17 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 m_localIndex = 0;
             }
         }
+    }
+
+    private int FindLocalIndex( float p_time, int p_startIndex = 0 )
+    {
+        int _localIndex = p_startIndex;
+        //find the correct index
+        while( p_time >= m_timestamp + ( (float)_localIndex*DEFAULT_DURATION )  )
+        {
+            _localIndex++;
+        }
+        return _localIndex;
     }
 
     public bool GivePoint( float p_time )
