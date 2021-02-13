@@ -327,12 +327,21 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             return;
         }
         //Cut Current Timeline Clip if it exists
-        if( m_pointerTrackClips.Count > m_trackIndex[1] && m_pointerTrackClips[ m_trackIndex[1]  ] != null )//&& m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        // if( m_pointerTrackClips.Count > m_trackIndex[1] && m_pointerTrackClips[ m_trackIndex[1]  ] != null )//&& m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        // if( m_pointerTrackClips.Count > m_trackIndex[1] && m_pointerTrackClips[ m_trackIndex[1]  ] != null )//&& m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        // {
+        //     if( m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        //     {
+        //         Debug.Log("Trimming Current Animation");
+        //         m_pointerTrackClips[ m_trackIndex[1]  ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
+        //     }
+        // }
+        for( int i = 0 ; i < m_pointerTrackClips.Count ; i++ )
         {
-            if( m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+            if( m_pointerTrackClips[i].TimeStamp < m_timeIndicator.GetCurrentTime() && m_pointerTrackClips[i].TimeStampFinish > m_timeIndicator.GetCurrentTime() )
             {
                 Debug.Log("Trimming Current Animation");
-                m_pointerTrackClips[ m_trackIndex[1]  ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
+                m_pointerTrackClips[ m_trackIndex[1] ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
             }
         }
         TimelineClip temp = Instantiate( m_timelineClipPrefab.gameObject, m_track[ 0 ] ).GetComponent<TimelineClip>();
