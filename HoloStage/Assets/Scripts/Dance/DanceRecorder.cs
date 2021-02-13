@@ -54,6 +54,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         m_trackIndex[0] = 0;
         m_trackIndex[1] = 0;
         m_recordCountdown.SetCallback( StartRecording );
+        m_timeIndicator.e_PlayButtonPress +=OnPlayButtonPress;
     }
     protected override void Awake()
     {
@@ -256,6 +257,15 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
         //         m_pointerTrackClips[ m_trackIndex[1]  ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
         //     }
         // }
+    }
+
+    public void OnPlayButtonPress()
+    {
+        if( b_recordButtonState )
+        {
+            m_recordCountdown.CancelCountdown();
+            SetRecordingState ( true );
+        }
     }
 
     public void OnRecordButtonPressed()

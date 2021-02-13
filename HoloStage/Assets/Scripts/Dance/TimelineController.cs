@@ -28,6 +28,7 @@ public class TimelineController : MonoBehaviour
     public float ZoomLevel {get{ return m_zoomLevelArray[m_zoomLevelIndex]; }}
     public bool IsTimeFlowing {get{ return m_bIsTimeFlowing; }}
 
+    public System.Action e_PlayButtonPress;
 
     // private bool DanceRecorder.Instance.IsBeingDragged;
 
@@ -128,6 +129,7 @@ public class TimelineController : MonoBehaviour
         {
             m_playButtons[i].SetIcon(m_bIsTimeFlowing);
         }
+        e_PlayButtonPress.Invoke();
     }
 
     public void StartTimeFlow()
