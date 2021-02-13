@@ -184,6 +184,7 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
             m_latestPointerClip.FinishPointerData();
+            OnFinishedPointerRecord();
             m_pointerDuration = 0;
             b_pointerIsRecording = false;
         }
@@ -215,10 +216,46 @@ public class DanceRecorder : MonoInstance<DanceRecorder>
             m_latestPointerClip.SetDuration(  m_pointerDuration, m_timeIndicator.ZoomLevel );
             // m_latestPointerClip.AddPoint( m_follow.PointerPosition, m_pointerDuration );
             m_latestPointerClip.FinishPointerData();
+            OnFinishedPointerRecord();
             m_pointerDuration = 0;
             b_pointerIsRecording = false;
         }
         
+    }
+
+    public void OnFinishedPointerRecord()
+    {
+        //put code here for trimming clips that are overlapping by new timeline clip
+        List<TimelineClip> clipToTrim = new List<TimelineClip>();
+
+        float startTime = m_latestPointerClip.TimeStamp;
+        float endTime = m_timeIndicator.GetCurrentTime();
+
+        //Find Clips to trim
+        for( int i = 0 ; i < m_pointerTrackClips.Count; i++ )
+        {
+            if(  m_pointerTrackClips[i] != m_latestPointerClip 
+                && m_pointerTrackClips[i].TimeStamp > startTime 
+                && m_pointerTrackClips[i].TimeStamp < endTime )
+            {
+                Debug.LogError("trim clip before :" + i);
+                clipToTrim.Add(m_pointerTrackClips[i]);
+            }
+        }
+
+        //Trim clips found
+        for( int i = 0 ; i < clipToTrim.Count; i++ )
+        {
+            clipToTrim[i].TrimClipBefore( startTime, endTime, m_timeIndicator.ZoomLevel );
+        }
+        // if( m_pointerTrackClips.Count > m_trackIndex[1] && m_pointerTrackClips[ m_trackIndex[1]  ] != null )
+        // {
+        //     if( m_pointerTrackClips[ m_trackIndex[1]  ].TimeStamp < m_timeIndicator.GetCurrentTime() )
+        //     {
+        //         Debug.Log("Trimming Current Animation");
+        //         m_pointerTrackClips[ m_trackIndex[1]  ].TrimClip(m_timeIndicator.GetCurrentTime(), m_timeIndicator.ZoomLevel );
+        //     }
+        // }
     }
 
     public void OnRecordButtonPressed()

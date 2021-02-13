@@ -136,6 +136,30 @@ public class TimelineClip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         SetWidth( TimelineController.ConvertDurationToWidth( p_dur, p_zoomLevel ) );
     }
+    public void TrimClipBefore( float p_startTime, float p_endTime, float p_zoomLevel )
+    {
+        //If time is after the full duration of this clip
+        if( p_startTime < m_timestamp && p_endTime > (m_timestamp+ m_duration) )
+        {
+            RemoveFromTrack();
+            return;
+        }
+        //If time is within this clip
+        float dur = (m_timestamp+m_duration) - p_endTime;
+        if( dur > DEFAULT_DURATION )
+        {
+            m_duration = dur;
+        }
+        else
+        {
+            m_duration = DEFAULT_DURATION;
+        }
+        m_timestamp = p_endTime;
+        SetWidth( TimelineController.ConvertDurationToWidth( m_duration, p_zoomLevel ) );
+        RefreshPosition();
+        int indexToCut = FindLocalIndex( p_endTime );
+        m_pointerPositions.RemoveRange( 0, indexToCut );
+    }
 
     public void TrimClip( float p_endTime, float p_zoomLevel )
     {
