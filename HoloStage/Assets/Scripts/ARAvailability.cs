@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_ANDROID
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARCore;
-
+#endif
 public class ARAvailability : MonoBehaviour
 {
     public Button m_button;
+#if UNITY_ANDROID
+
     private void OnEnable()
     {
         StartCoroutine(ARSession.CheckAvailability());
@@ -42,5 +45,6 @@ public class ARAvailability : MonoBehaviour
             }
         }      
     }
+#endif
  
 }
