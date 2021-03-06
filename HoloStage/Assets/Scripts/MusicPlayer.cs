@@ -30,6 +30,7 @@ public class MusicPlayer : MonoBehaviour
             m_playButtons[i].SetIcon(false);
         }
         m_musicSpeed = 1;
+        m_timeIndicator.e_PlayButtonPress +=OnPressPlayButton;
         // DanceRecorder.Instance.IsBeingDragged = false;
     }
 
