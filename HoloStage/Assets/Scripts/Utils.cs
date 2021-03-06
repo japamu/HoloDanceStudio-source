@@ -11,6 +11,7 @@ public class Utils
     public const int REPEAT_HELP = 3;
     public const string KEY_PINCH = "hds_pinch";
     public const int REPEAT_PINCH = 2;
+    public const string KEY_ARCHECK = "hds_ar_check";
     // Start is called before the first frame update
     public static bool MouseScreenCheck(){
         #if UNITY_EDITOR

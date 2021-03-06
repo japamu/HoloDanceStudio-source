@@ -10,24 +10,73 @@ public class ARAvailability : MonoBehaviour
 {
     public Button[] m_button;
     public GameObject m_ARConfirmationScreen;
+    public GameObject m_ARCheckScreen;
+    public GameObject m_loadIndicator;
+    private bool m_bIsInstalling = false;
 
 #if UNITY_ANDROID
 
     private void OnEnable()
     {
-        StartCoroutine(ARSession.CheckAvailability());
-        StartCoroutine(AllowARScene());
+        // StartCoroutine(ARSession.CheckAvailability());
+        // StartCoroutine(AllowARScene());
         // m_button.interactable = false;
+
+        //if AR check has been done
+        if( PlayerPrefs.HasKey( Utils.KEY_ARCHECK) )
+        {
+            //If AR is available
+            if( PlayerPrefs.GetInt(Utils.KEY_ARCHECK,0) > 0 )
+            {
+                // GetComponent<ARSession>().enabled = true;
+                Debug.Log("AR available");
+            }
+            else
+            {
+                //AR not available for device
+                Debug.Log("AR not available");
+                SetButtonState(false);
+            }
+        }
     }
 
     private void SetButtonState( bool p_state, bool p_show=false )
     {
+        Debug.Log("set button state: " + p_state );
         for( int i = 0 ; i < m_button.Length ; i++ )
         {
             m_button[i].interactable = p_state;
-            m_button[i].gameObject.SetActive( p_show? true: p_state);
+            m_button[i].gameObject.SetActive( p_state);
         }
     }
+
+    public void OnButtonPress()
+    {
+        //If AR Check has not been done
+        if( !PlayerPrefs.HasKey( Utils.KEY_ARCHECK) || PlayerPrefs.GetInt( Utils.KEY_ARCHECK) < 2 )
+        {
+            ShowCheckScreen();
+        }
+        else
+        {
+            //If AR check has been done
+            ShowConfirmationScreen();
+        }
+    }
+
+    private void ShowCheckScreen()
+    {
+        Debug.Log("Show AR Check Screen");
+        m_ARCheckScreen.SetActive(true);
+    }
+
+    public void CheckScreenOK()
+    {
+        GetComponent<ARSession>().enabled = true;
+        StartCoroutine(ARSession.CheckAvailability());
+        StartCoroutine(AllowARScene());
+    }
+
 
     public void ShowConfirmationScreen()
     {
@@ -41,7 +90,10 @@ public class ARAvailability : MonoBehaviour
             case ARSessionState.NeedsInstall:
                 Debug.Log("AR Needs Installing");
                 //add coroutine for rotating button
-                ARSession.Install();
+                // StartCoroutine(ARSession.CheckAvailability());
+                // ARSession.Install();
+                // StartCoroutine(CheckARInstall());
+                // m_bIsInstalling = true;
             break;
             case ARSessionState.Installing:
                 Debug.Log("AR Installing");
@@ -49,6 +101,7 @@ public class ARAvailability : MonoBehaviour
             case ARSessionState.Ready:
             case ARSessionState.SessionInitializing:
             case ARSessionState.SessionTracking:
+                m_bIsInstalling = false;
                 Debug.Log("AR Ready");
                 m_ARConfirmationScreen.SetActive(true);
             break;
@@ -64,19 +117,54 @@ public class ARAvailability : MonoBehaviour
                 ARSession.state == ARSessionState.None)
             {
                 Debug.Log("Waiting...");
-                SetButtonState(false, true);
+                // SetButtonState(false, true);
                 yield return null;
             }
             if (ARSession.state == ARSessionState.Unsupported)
             {
                 Debug.Log("AR unsupported");
-                SetButtonState(false);
+                NotificationScreen.Instance.ShowWindow("AR Unsupported");
+                SetButtonState(false);  //Hide AR buttons to unavailable
+                PlayerPrefs.SetInt(Utils.KEY_ARCHECK,0);
                 yield break;
+            }
+            while (ARSession.state == ARSessionState.NeedsInstall ||
+                ARSession.state == ARSessionState.Installing )
+            {
+                SetButtonState(true);
+                // m_loadIndicator.SetActive(true);
+                Debug.Log("AR Installing...");
+                PlayerPrefs.SetInt(Utils.KEY_ARCHECK,1);
+                yield return null;
             }
             if (ARSession.state > ARSessionState.CheckingAvailability)
             {
                 Debug.Log("AR supported");
+                NotificationScreen.Instance.ShowWindow("AR Supported, Click AR Button again");
                 SetButtonState(true);
+                PlayerPrefs.SetInt(Utils.KEY_ARCHECK,2);
+                yield break;
+            }
+        }      
+    }
+    IEnumerator CheckARInstall()
+    {
+        while (true)
+        {
+            while (ARSession.state == ARSessionState.NeedsInstall ||
+                ARSession.state == ARSessionState.Installing )
+            {
+                m_loadIndicator.SetActive(true);
+                Debug.Log("AR Installing...");
+                PlayerPrefs.SetInt(Utils.KEY_ARCHECK,1);
+                yield return null;
+            }
+            if (ARSession.state >= ARSessionState.Ready)
+            {
+                Debug.Log("AR Install Complete");
+                m_loadIndicator.SetActive(false);
+                m_bIsInstalling = false;
+                PlayerPrefs.SetInt(Utils.KEY_ARCHECK,2);
                 yield break;
             }
         }      
