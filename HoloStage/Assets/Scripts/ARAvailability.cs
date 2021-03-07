@@ -26,10 +26,15 @@ public class ARAvailability : MonoBehaviour
         if( PlayerPrefs.HasKey( Utils.KEY_ARCHECK) )
         {
             //If AR is available
-            if( PlayerPrefs.GetInt(Utils.KEY_ARCHECK,0) > 0 )
+            if( PlayerPrefs.GetInt(Utils.KEY_ARCHECK,0) == 2  )
+            {
+                GetComponent<ARSession>().enabled = true;
+                Debug.Log("AR available");
+            }
+            else if( PlayerPrefs.GetInt(Utils.KEY_ARCHECK,0) > 0 )
             {
                 // GetComponent<ARSession>().enabled = true;
-                Debug.Log("AR available");
+                Debug.Log("AR available but needs update");
             }
             else
             {
@@ -37,6 +42,8 @@ public class ARAvailability : MonoBehaviour
                 Debug.Log("AR not available");
                 SetButtonState(false);
             }
+
+
         }
     }
 
